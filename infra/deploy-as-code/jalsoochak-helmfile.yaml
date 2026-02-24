@@ -1,0 +1,215 @@
+repositories:
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  # - name: apache-airflow
+  #   url: https://airflow.apache.org
+  # - name: superset
+  #   url: https://apache.github.io/superset
+  # - name: prometheus-community
+  #   url: https://prometheus-community.github.io/helm-charts
+  # - name: bitnami
+  #   url: https://charts.bitnami.com/bitnami
+
+templates: 
+  default: &default
+    missingFileHandler: Warn
+values:
+  - ./charts/environments/jalsoochak-dev-secret.yaml
+  - ./charts/environments/jalsoochak-dev.yaml
+
+helmDefaults:
+  args:
+    - --values
+    - ./charts/environments/jalsoochak-dev.yaml
+
+releases:
+  - name: ingress-nginx
+    installed: true
+    chart: ./charts/service/ingress-nginx
+    version: 4.10.0
+    <<: *default
+    values:
+      - ./charts/service/ingress-nginx/values.yaml
+      - ./charts/service/ingress-nginx/values-domain.gotmpl
+
+
+  # Keycloak (Codecentric)
+  - name: keycloak
+    chart: bitnami/keycloak
+    version: 25.2.0
+    values:
+      - ./charts/service/keycloak/values.yaml
+
+
+  - name: flowvision
+    chart: ./charts/service/flowvision
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/flowvision/values.yaml
+
+  - name: clickhouse
+    chart: bitnami/clickhouse
+    version: 9.4.4
+    values:
+      - ./charts/service/clickhouse-cluster/values.yaml
+
+  # Apache Airflow (ETL)
+  - name: airflow
+    chart: apache-airflow/airflow
+    version: 1.18.0
+    values:
+      - ./charts/service/airflow/values.yaml 
+
+  - name: cert-manager
+    chart: ./charts/service/cert-manager
+    installed: true
+    version: v1.13.3
+    disableValidation: true
+    values:
+      - ./charts/service/cert-manager/values.yaml
+
+  - name: managementservice
+    chart: ./charts/service/ManagementService
+    installed: true
+    version: v1.13.3
+    <<: *default
+    values:
+      - ./charts/service/ManagementService/values.yaml
+
+  - name: servicediscovery
+    chart: ./charts/service/servicediscovery
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/servicediscovery/values.yaml
+
+  
+  - name: apigateway
+    chart: ./charts/service/apigateway
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/apigateway/values.yaml
+
+  
+  - name: imageprocessing
+    chart: ./charts/service/imageprocessing
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/imageprocessing/values.yaml
+
+  
+  - name: jalsoochak-frontend
+    chart: ./charts/service/jalsoochak-frontend
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/jalsoochak-frontend/values.yaml
+  
+  - name: messaging-orchestrator-service
+    chart: ./charts/service/messaging-orchestrator-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/messaging-orchestrator-service/values.yaml
+ 
+  - name: water-supply-calculation-service
+    chart: ./charts/service/water-supply-calculation-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/water-supply-calculation-service/values.yaml
+
+  - name: anomaly-service
+    chart: ./charts/service/anomaly-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/anomaly-service/values.yaml
+
+  - name: scheme-service
+    chart: ./charts/service/scheme-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/scheme-service/values.yaml
+
+  - name: telemetry-service
+    chart: ./charts/service/telemetry-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/telemetry-service/values.yaml
+
+  - name: tenant-service
+    chart: ./charts/service/tenant-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/tenant-service/values.yaml
+
+  - name: user-service
+    chart: ./charts/service/user-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/user-service/values.yaml
+
+  - name: message-service
+    chart: ./charts/service/message-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/message-service/values.yaml
+ 
+  # - name: mysql
+  #   chart: groundhog2k/mysql
+  #   values:
+  #     - ./charts/service/mysql/values.yaml
+
+  # - name: minio
+  #   installed: true
+  #   chart: ./charts/service/minio
+  #   version: 13.3.1
+  #   <<: *default
+  #   values:
+  #     - ./charts/service/minio/values.yaml
+
+  - name: redis
+    installed: true
+    chart: ./charts/service/redis
+    version: 7.2.4
+    <<: *default
+    values:
+      - ./charts/service/redis/values.yaml
+
+  - name: kafka-kraft
+    installed: true
+    chart: ./charts/service/kafka-kraft
+    version: 26.2.0
+    <<: *default
+    values:
+      - ./charts/service/kafka-kraft/values.yaml
+
+  - name: kube-prometheus-stack
+    installed: true
+    chart: prometheus-community/kube-prometheus-stack
+    version: 56.6.2
+    disableValidation: true
+    values:
+      - ./charts/service/monitoring/prometheus.yaml
+
+  - name: grafana
+    installed: true
+    chart: grafana/grafana
+    version: 7.3.0
+    values:
+      - ./charts/service/monitoring/grafana.yaml
+      - ./charts/service/monitoring/values-domain.gotmpl

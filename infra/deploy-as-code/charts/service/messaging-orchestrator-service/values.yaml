@@ -1,0 +1,66 @@
+# Common Labels
+labels:
+  app: "messaging-orchestrator-service"
+  group: "core"
+
+
+ingress:
+  enabled: true
+  zuul: true
+  context: "api/pump-operators(/|$)(.*)"
+# Init Containers Configs
+
+# Container Configs
+image:
+  repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/messaging-orchestrator-service"
+  tag: "2fac1942beae9f25677b806217007f2acb6b66e4"
+replicas: "1"
+# tracing-enabled: true
+# healthChecks:
+#   enabled: true
+#   livenessProbePath: "/water-suppy-calculation-service/health"
+#   readinessProbePath: "/water-suppy-calculation-service/health"
+
+# Additional Container Envs
+env: |
+  - name: SERVER_PORT
+    value: "8080"
+  - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+    value: "http://servicediscovery:8761/eureka"
+  - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+    value: "kafka-kraft-controller-headless:9092"
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      secretKeyRef:
+        key: db-url
+        name: jalsoochak
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: jalsoochak
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: password
+        name: jalsoochak
+  - name: GLIFIC_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: glific-username
+        name: glific
+  - name: GLIFIC_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: glific-password
+        name: glific
+  - name: GLIFIC_WELCOME_TEMPLATE_ID
+    valueFrom:
+      secretKeyRef:
+        key: glific-welcome-template-id
+        name: glific
+  - name: GLIFIC_BFM_REMINDER_TEMPLATE_ID
+    valueFrom:
+      secretKeyRef:
+        key: glific-bfm-reminder-template-id
+        name: glific

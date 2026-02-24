@@ -1,0 +1,85 @@
+# Common Labels
+labels:
+  app: "AnomalyService"
+  group: "core"
+
+
+# ingress:
+#   enabled: true
+#   zuul: true
+#   context: "api/v2/auth(/|$)(.*)"
+# # Init Containers Configs
+
+# Container Configs
+image:
+  repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/anomaly-service"
+  tag: "ac2b55470adf56dfd8c173a5ec0dd683796993ef"
+replicas: "1"
+# tracing-enabled: true
+# healthChecks:
+#   enabled: true
+#   livenessProbePath: "/management-service/health"
+#   readinessProbePath: "/management-service/health"
+
+# Additional Container Envs
+env: |
+  - name: SERVER_PORT
+    value: "8080"
+  - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+    value: "kafka-kraft-controller-headless:9092"
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      secretKeyRef:
+        key: db-url
+        name: jalsoochak
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: username
+        name: jalsoochak
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: password
+        name: jalsoochak
+  - name: KEYCLOAK_AUTH_SERVER_URL
+    value: "http://keycloak:80/keycloak"
+  - name: KEYCLOAK_CREDENTIALS_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-credential-secret
+        name: jalsoochak
+  - name: KEYCLOAK_ADMIN_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-admin-client-secret
+        name: jalsoochak
+  - name: SPRING_MAIL_USERNAME
+    valueFrom:
+      secretKeyRef:
+        key: mail-username
+        name: jalsoochak
+  - name: SPRING_MAIL_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: mail-password
+        name: jalsoochak
+  - name: MAIL_FROM_EMAIL
+    valueFrom:
+      secretKeyRef:
+        key: mail-id
+        name: jalsoochak
+  - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_DEBUG
+    value: "true"
+  - name: KEYCLOAK_REALM
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-realm
+        name: jalsoochak
+  - name: KEYCLOAK_PUBLIC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-public-key
+        name: jalsoochak
+  - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+    value: "http://servicediscovery:8761/eureka"
