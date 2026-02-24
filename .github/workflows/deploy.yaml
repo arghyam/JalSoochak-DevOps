@@ -26,9 +26,11 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
 
     steps:
-      - name: Checkout
+      - name: Checkout DevOps Repo
         uses: actions/checkout@v4
         with:
+          repository: arghyam/JalsoochakV2-Devops
+          ref: dev
           fetch-depth: 0
           
       - name: Set up Helm
