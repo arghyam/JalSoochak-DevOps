@@ -43,7 +43,7 @@ env: |
         key: password
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
-    value: "http://keycloak:80/keycloak"
+    value: "https://jalsoochak.beehyv.com/keycloak"
   - name: KEYCLOAK_CREDENTIALS_SECRET
     valueFrom:
       secretKeyRef:
@@ -81,3 +81,30 @@ env: |
       secretKeyRef:
         key: keycloak-public-key
         name: jalsoochak
+  - name: MINIO_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: MINIO_BUCKET
+    valueFrom:
+      secretKeyRef:
+        key: bucket
+        name: minio
+  - name: MINIO_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: accessKey
+        name: minio
+  - name: MINIO_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: secretKey
+        name: minio
+  - name: MINIO_REGION
+    valueFrom:
+      secretKeyRef:
+        key: region
+        name: minio
+  - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
+    value: "http://servicediscovery:8761/eureka"

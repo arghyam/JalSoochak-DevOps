@@ -43,7 +43,7 @@ env: |
         key: password
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
-    value: "http://keycloak:80/keycloak"
+    value: "https://jalsoochak.beehyv.com/keycloak"
   - name: KEYCLOAK_CREDENTIALS_SECRET
     valueFrom:
       secretKeyRef:
