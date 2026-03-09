@@ -29,7 +29,7 @@ jobs:
       - name: Checkout DevOps Repo
         uses: actions/checkout@v4
         with:
-          repository: arghyam/JalsoochakV2-Devops
+          repository: arghyam/JalSoochak-Devops
           ref: dev
           fetch-depth: 0
           
