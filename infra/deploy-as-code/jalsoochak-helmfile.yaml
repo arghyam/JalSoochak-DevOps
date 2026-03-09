@@ -168,6 +168,13 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/message-service/values.yaml
+
+  - name: analytics-service
+    chart: ./charts/service/analytics-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/analytics-service/values.yaml
  
   # - name: mysql
   #   chart: groundhog2k/mysql
