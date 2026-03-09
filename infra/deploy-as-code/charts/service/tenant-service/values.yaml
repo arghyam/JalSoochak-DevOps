@@ -6,7 +6,7 @@ labels:
 
 ingress:
   enabled: true
-  zuul: true
+  # zuul: true
   context: "api/v1/tenants"
 # Init Containers Configs
 
