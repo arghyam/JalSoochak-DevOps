@@ -4,16 +4,16 @@ labels:
   group: "core"
 
 
-# ingress:
-#   enabled: true
-#   zuul: true
-#   context: "api/v2/auth(/|$)(.*)"
-# # Init Containers Configs
+ingress:
+  enabled: true
+  zuul: true
+  context: "api/v2/webhook"
+# Init Containers Configs
 
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/telemetry-service"
-  tag: "ac2b55470adf56dfd8c173a5ec0dd683796993ef"
+  tag: "270590dda5e704be65f79036716befb6ab82615d"
 replicas: "1"
 # tracing-enabled: true
 # healthChecks:
