@@ -1,15 +1,10 @@
-# Default values for egov-finance.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-# Common Labels
 labels:
   app: "redis"
 
 # Container Configs
 image:
-  repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/redis"
+  repository: "bitnamilegacy/redis"
   pullPolicy: IfNotPresent
-  tag: "7.2.4"
+  tag: "3.2.3-r1"
 replicas: "1"
 httpPort: 6379

@@ -220,3 +220,17 @@ releases:
     values:
       - ./charts/service/monitoring/grafana.yaml
       - ./charts/service/monitoring/values-domain.gotmpl
+
+  - name: loki
+    installed: true
+    chart: grafana/loki
+    version: 6.6.2
+    values:
+      - ./charts/service/monitoring/loki-values.yaml
+
+  - name: promtail
+    installed: true
+    chart: grafana/promtail
+    version: 6.15.5
+    values:
+      - ./charts/service/monitoring/promtail-values.yaml

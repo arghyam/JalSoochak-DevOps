@@ -618,7 +618,7 @@ datasources:
       type: loki
       access: proxy
       editable: false
-      url: http://loki-stack:3100
+      url: http://loki:3100
 
 
 ## Configure grafana alerting (can be templated)
@@ -789,7 +789,39 @@ dashboards:
       token: '' 
     Loki-Logs:
       url: https://raw.githubusercontent.com/egovernments/configs/master/monitoring-dashboards/loki.json
-      token: ''       
+      token: ''
+    Microservices-Overview:
+      json: |
+        {
+          "annotations": {
+            "list": []
+          },
+          "editable": true,
+          "fiscalYearStartMonth": 0,
+          "graphTooltip": 0,
+          "id": null,
+          "links": [],
+          "panels": [],
+          "refresh": "30s",
+          "schemaVersion": 39,
+          "style": "dark",
+          "tags": [
+            "microservices"
+          ],
+          "templating": {
+            "list": []
+          },
+          "time": {
+            "from": "now-15m",
+            "to": "now"
+          },
+          "timepicker": {},
+          "timezone": "browser",
+          "title": "Microservices Overview",
+          "uid": "microservices-overview",
+          "version": 1,
+          "weekStart": ""
+        }
         
       
 
