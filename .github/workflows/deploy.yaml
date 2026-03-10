@@ -23,7 +23,7 @@ on:
 jobs:
   Helm-Deployment:
     name: Deployment for ${{ inputs.service_name }}
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout DevOps Repo
