@@ -43,7 +43,11 @@ jobs:
         with:
           helm-plugins: >
             https://github.com/databus23/helm-diff --verify=false
-            
+      - name: Configure Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          export KUBECONFIG=$PWD/kubeconfig
+          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV            
       - name: Helm Deployment
         run: |
           IMAGE="${{ inputs.image_tag }}"
