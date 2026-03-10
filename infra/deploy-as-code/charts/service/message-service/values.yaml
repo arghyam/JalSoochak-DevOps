@@ -89,3 +89,30 @@ env: |
     value: "829817"
   - name: GLIFIC_NUDGE_FLOW_ID
     value: "37300"
+  - name: MINIO_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: MINIO_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: accessKey
+        name: minio
+  - name: MINIO_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: secretKey
+        name: minio
+  - name: MINIO_REGION
+    valueFrom:
+      secretKeyRef:
+        key: region
+        name: minio
+  - name: MINIO_BUCKET
+    value: "escalation-reports"
+  - name: MINIO_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
