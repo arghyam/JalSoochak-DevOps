@@ -7,7 +7,9 @@ labels:
 ingress:
   enabled: true
   # zuul: true
-  context: "api/v1/tenants"
+  contexts:
+    - "api/v1/tenants"
+    - "api/v1/system"
 # Init Containers Configs
 
 # Container Configs

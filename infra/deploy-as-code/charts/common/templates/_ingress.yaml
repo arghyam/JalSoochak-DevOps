@@ -33,6 +33,24 @@ spec:
 {{- end }}  
     http:
       paths:
+      {{- if .Values.ingress.contexts }}
+      {{- range .Values.ingress.contexts }}
+      - backend:
+          {{- if $.Values.ingress.zuul }}          
+          service:
+            name: apigateway
+            port:
+              number: 8080
+          {{- else }}
+          service:
+            name: {{ $.Values.ingress.serviceName | default (include "common.name" $) }}
+            port:
+              number: {{ $.Values.ingress.servicePort | default $.Values.httpPort }}
+          {{- end }}            
+        path: /{{ . }}
+        pathType: {{ $.Values.ingress.pathType | default "Prefix" }}
+      {{- end }}
+      {{- else }}
       - backend:
 {{- if .Values.ingress.zuul }}          
           service:
@@ -47,6 +65,7 @@ spec:
 {{- end }}            
         path: /{{ .Values.ingress.context }}
         pathType: {{ .Values.ingress.pathType | default "Prefix" }}
+      {{- end }}
 {{- if ne .Values.global.setup "quickstart" }}        
   tls:
 {{- if .Values.ingress.tls }}
