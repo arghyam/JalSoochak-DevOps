@@ -84,8 +84,8 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: GLIFIC_NUDGE_TEMPLATE_ID
-    value: 829747
+    value: "829747"
   - name: GLIFIC_ESCALATION_TEMPLATE_ID
-    value: 829817
+    value: "829817"
   - name: GLIFIC_NUDGE_FLOW_ID
-    value: 37300
+    value: "37300"
