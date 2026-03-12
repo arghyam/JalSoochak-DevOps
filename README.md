@@ -1,6 +1,6 @@
-# Jalsoochak V2 Devops
+# Jalsoochak Devops
 
-This repository contains the infrastructure and deployment configurations for the Jalsoochak V2 project.
+This repository contains the infrastructure and deployment configurations for the Jalsoochak project.
 
 ## Deployment Guide (Dev Server)
 
