@@ -36,10 +36,9 @@ Navigate to the deployment directory:
 cd infra/deploy-as-code
 ```
 
-#### 1. Create Namespace
-Ensure the target namespace exists:
+#### 1. Deploy Postgres
 ```bash
-kubectl create namespace jalsoochak-dev --dry-run=client -o yaml | kubectl apply -f -
+helmfile apply -f prostgres-helmfile.yaml
 ```
 
 #### 2. Create Secret and ConfigMap
