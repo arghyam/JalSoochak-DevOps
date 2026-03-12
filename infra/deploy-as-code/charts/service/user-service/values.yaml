@@ -73,9 +73,9 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: FRONTEND_BASE_URL
-    value: "https://localhost:3000/"
+    value: "http://localhost:3000/"
   - name: CORS_ALLOWED_ORIGINS
-    value: "https://localhost:3000/"
+    value: "http://localhost:3000/, https://jalsoochak.beehyv.com"
   - name: KEYCLOAK_CLIENT_ID
     value: "jalsoochak-app"
   - name: KEYCLOAK_CLIENT_SECRET

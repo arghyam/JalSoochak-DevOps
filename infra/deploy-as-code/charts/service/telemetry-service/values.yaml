@@ -13,7 +13,7 @@ ingress:
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/telemetry-service"
-  tag: "270590dda5e704be65f79036716befb6ab82615d"
+  tag: "6bca4f49994026eb4b569933744273101722eddd"
 replicas: "1"
 # tracing-enabled: true
 # healthChecks:

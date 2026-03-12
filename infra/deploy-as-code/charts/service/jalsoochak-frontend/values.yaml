@@ -14,7 +14,7 @@ ingress:
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/jalsoochak-frontend"
-  tag: "2865197fd0ed7ef953b47da683e500e3ebb4930b"
+  tag: "675cba8da7afdf742f6c24ca4549dc3c3a2d5393"
 replicas: "1"
 tracing-enabled: true
 httpPort: 80
