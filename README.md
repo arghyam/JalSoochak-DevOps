@@ -4,7 +4,7 @@ This repository contains the infrastructure and deployment configurations for th
 
 ## Deployment Guide (Dev Server)
 
-This guide outlines the steps to deploy the Jalsoochak V2 services to the development server.
+This guide outlines the steps to deploy the Jalsoochak services to the development server.
 
 ### Prerequisites
 
@@ -24,6 +24,11 @@ The secrets in `infra/deploy-as-code/charts/environments/dev-secret.yaml` are en
 
 You can set the `SOPS_AGE_KEY` environment variable or ensure the key is present in its default location (`~/.config/sops/age/keys.txt`).
 
+To decrypt the secrets file (e.g., for troubleshooting or before a manual apply):
+```bash
+sops -d -i infra/deploy-as-code/charts/environments/dev-secret.yaml
+```
+
 ### Deployment Steps
 
 Navigate to the deployment directory:
@@ -31,10 +36,24 @@ Navigate to the deployment directory:
 cd infra/deploy-as-code
 ```
 
-#### 1. Pull Helm Chart Dependencies
-Before deploying, ensure all dependencies are resolved:
+#### 1. Create Namespace
+Ensure the target namespace exists:
+```bash
+kubectl create namespace jalsoochak-dev --dry-run=client -o yaml | kubectl apply -f -
+```
 
-#### 2. Deploy Services
+#### 2. Create Secret and ConfigMap
+Before running `helmfile apply`, create the necessary Kubernetes secrets and configmaps:
+
+```bash
+# Apply ConfigMap
+kubectl apply -f charts/environments/dev-cm.yaml
+
+# Decrypt and apply Secrets
+sops -d charts/environments/dev-secret.yaml | kubectl apply -f -
+```
+
+#### 3. Deploy Services
 To deploy the entire stack to the development environment:
 ```bash
 helmfile apply -f jalsoochak-helmfile.yaml
