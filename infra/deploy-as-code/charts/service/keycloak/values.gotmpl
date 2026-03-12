@@ -21,42 +21,39 @@ hostnameStrict: true
 postgresql:
   enabled: false # Using external DB
 externalDatabase:
-  vendor: mysql
+  vendor: postgres
   host: "dummy"
-  port: "3306"
+  port: "5432"
   user: ""
   database: ""
   password: "dummy"
-  existingSecret: "jalsoochak"
+  existingSecret: "keycloak"
   existingSecretHostKey: "host"
-  existingSecretPortKey: ""
+  existingSecretPortKey: "port"
   existingSecretUserKey: "username"
   existingSecretDatabaseKey: "database"
   existingSecretPasswordKey: "password"
   annotations: {}
 extraEnvVars:
   - name: KC_DB 
-    value: 'mysql'
+    value: 'postgres'
   - name: KC_DB_URL
     valueFrom:
       secretKeyRef:
         key: db-url
-        name: jalsoochak
-  - name: KC_DB_SCHEMA # <--- ADD THIS
-    valueFrom:
-      secretKeyRef:
-        key: database
-        name: jalsoochak
+        name: keycloak
+  - name: KC_DB_SCHEMA
+    value: public
   - name: KC_DB_USERNAME
     valueFrom:
       secretKeyRef:
         key: username
-        name: jalsoochak
+        name: keycloak
   - name: KC_DB_PASSWORD
     valueFrom:
       secretKeyRef:
         key: password
-        name: jalsoochak
+        name: keycloak
   - name: KC_HOSTNAME
     value: https://{{ .Values.global.domain }}/keycloak/
 ingress:
@@ -98,3 +95,4 @@ resources:
 
 podDisruptionBudget:
   maxUnavailable: 1
+

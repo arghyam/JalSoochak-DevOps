@@ -43,7 +43,7 @@ releases:
     chart: bitnami/keycloak
     version: 25.2.0
     values:
-      - ./charts/service/keycloak/values.yaml
+      - ./charts/service/keycloak/values.gotmpl
 
 
   - name: flowvision
