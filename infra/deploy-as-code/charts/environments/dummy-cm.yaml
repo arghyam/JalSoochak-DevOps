@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  config.js: |
+    window.APP_CONFIG = {
+      API_BASE_URL: 'https://jalsoochak.beehyv.com',
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: jalsoochak-frontend
+    meta.helm.sh/release-namespace: default
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: frontend-env
+  namespace: default

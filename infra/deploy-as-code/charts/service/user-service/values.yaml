@@ -4,16 +4,18 @@ labels:
   group: "core"
 
 
-# ingress:
-#   enabled: true
-#   zuul: true
-#   context: "api/v2/auth(/|$)(.*)"
-# # Init Containers Configs
+ingress:
+  enabled: true
+  # zuul: true
+  contexts:
+    - "api/v1/auth"
+    - "api/v1/users"
+# Init Containers Configs
 
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/user-service"
-  tag: "ac2b55470adf56dfd8c173a5ec0dd683796993ef"
+  tag: "bb1931f8fe14264544db5b7b5d8f621d7f71f411"
 replicas: "1"
 # tracing-enabled: true
 # healthChecks:
@@ -23,8 +25,6 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
-  - name: KEYCLOAK_CLIENT_ID
-    value: "jalsoochak-frontend"
   - name: spring.flyway.baseline-on-migrate
     value: "true"
   - name: SERVER_PORT
@@ -48,16 +48,6 @@ env: |
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
     value: "https://staging.jalsoochak.in/keycloak"
-  - name: KEYCLOAK_CREDENTIALS_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: keycloak-credential-secret
-        name: jalsoochak
-  - name: KEYCLOAK_ADMIN_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: keycloak-admin-client-secret
-        name: jalsoochak
   - name: SPRING_MAIL_USERNAME
     valueFrom:
       secretKeyRef:
@@ -75,17 +65,33 @@ env: |
         name: jalsoochak
   - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_DEBUG
     value: "true"
-  - name: KEYCLOAK_REALM
-    valueFrom:
-      secretKeyRef:
-        key: keycloak-realm
-        name: jalsoochak
   - name: KEYCLOAK_PUBLIC_KEY
     valueFrom:
       secretKeyRef:
         key: keycloak-public-key
         name: jalsoochak
-  - name: KEYCLOAK_ADMIN_CLIENT_ID
-    value: "jalsoochak"
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
+  - name: FRONTEND_BASE_URL
+    value: "http://localhost:3000/"
+  - name: CORS_ALLOWED_ORIGINS
+    value: "http://localhost:3000/, https://jalsoochak.beehyv.com"
+  - name: KEYCLOAK_CLIENT_ID
+    value: "jalsoochak-app"
+  - name: KEYCLOAK_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-credential-secret
+        name: jalsoochak
+  - name: KEYCLOAK_ADMIN_CLIENT_ID
+    value: "jalsoochak-admin"
+  - name: KEYCLOAK_ADMIN_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-admin-client-secret
+        name: jalsoochak
+  - name: KEYCLOAK_ISSUER_URI
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-issuer-uri
+        name: jalsoochak

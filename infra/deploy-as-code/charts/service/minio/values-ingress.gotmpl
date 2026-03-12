@@ -1,0 +1,21 @@
+auth:
+  rootUser: {{ .Values.secrets.minio.accessKey | default "admin" | quote }}
+  rootPassword: {{ .Values.secrets.minio.secretKey | default "password" | quote }}
+
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hostname: minio.{{ .Values.global.domain }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ index .Values "root-ingress" "cert-issuer" | quote }}
+    nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+  tls: true
+
+apiIngress:
+  enabled: true
+  ingressClassName: "nginx"
+  hostname: minio-api.{{ .Values.global.domain }}
+  annotations:
+    cert-manager.io/cluster-issuer: {{ index .Values "root-ingress" "cert-issuer" | quote }}
+    nginx.ingress.kubernetes.io/proxy-body-size: 1024m
+  tls: true

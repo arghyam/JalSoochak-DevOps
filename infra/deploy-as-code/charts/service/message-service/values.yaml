@@ -13,7 +13,7 @@ labels:
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/message-service"
-  tag: "ac2b55470adf56dfd8c173a5ec0dd683796993ef"
+  tag: "58e68dad38c33eb22faa9c82ee5731c27e96af3c"
 replicas: "1"
 # tracing-enabled: true
 # healthChecks:
@@ -44,16 +44,6 @@ env: |
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
     value: "https://staging.jalsoochak.in/keycloak"
-  - name: KEYCLOAK_CREDENTIALS_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: keycloak-credential-secret
-        name: jalsoochak
-  - name: KEYCLOAK_ADMIN_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: keycloak-admin-client-secret
-        name: jalsoochak
   - name: SPRING_MAIL_USERNAME
     valueFrom:
       secretKeyRef:
