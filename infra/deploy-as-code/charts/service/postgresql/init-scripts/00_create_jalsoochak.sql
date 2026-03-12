@@ -1,0 +1,3 @@
+CREATE DATABASE jalsoochak;
+
+GRANT ALL PRIVILEGES ON DATABASE jalsoochak TO beehyv;

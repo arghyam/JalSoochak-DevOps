@@ -60,7 +60,7 @@ extraDeploy: []
 ##
 image:
   registry: docker.io
-  repository: bitnami/minio
+  repository: bitnamilegacy/minio
   tag: 2024.1.29-debian-11-r0
   digest: ""
   ## Specify a imagePullPolicy
@@ -88,7 +88,7 @@ image:
 ##
 clientImage:
   registry: docker.io
-  repository: bitnami/minio-client
+  repository: bitnamilegacy/minio-client
   tag: 2024.1.28-debian-11-r0
   digest: ""
 ## @param mode MinIO&reg; server mode (`standalone` or `distributed`)
@@ -1006,7 +1006,7 @@ volumePermissions:
   ##
   image:
     registry: docker.io
-    repository: bitnami/os-shell
+    repository: bitnamilegacy/os-shell
     tag: 11-debian-11-r95
     digest: ""
     pullPolicy: IfNotPresent

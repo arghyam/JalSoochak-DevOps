@@ -43,7 +43,7 @@ releases:
     chart: bitnami/keycloak
     version: 25.2.0
     values:
-      - ./charts/service/keycloak/values.yaml
+      - ./charts/service/keycloak/values.gotmpl
 
 
   - name: flowvision
@@ -53,19 +53,6 @@ releases:
     values:
       - ./charts/service/flowvision/values.yaml
 
-  - name: clickhouse
-    chart: bitnami/clickhouse
-    version: 9.4.4
-    values:
-      - ./charts/service/clickhouse-cluster/values.yaml
-
-  # Apache Airflow (ETL)
-  - name: airflow
-    chart: apache-airflow/airflow
-    version: 1.18.0
-    values:
-      - ./charts/service/airflow/values.yaml 
-
   - name: cert-manager
     chart: ./charts/service/cert-manager
     installed: true
@@ -73,14 +60,6 @@ releases:
     disableValidation: true
     values:
       - ./charts/service/cert-manager/values.yaml
-
-  - name: managementservice
-    chart: ./charts/service/ManagementService
-    installed: true
-    version: v1.13.3
-    <<: *default
-    values:
-      - ./charts/service/ManagementService/values.yaml
 
   - name: servicediscovery
     chart: ./charts/service/servicediscovery
@@ -97,15 +76,6 @@ releases:
     values:
       - ./charts/service/apigateway/values.yaml
 
-  
-  - name: imageprocessing
-    chart: ./charts/service/imageprocessing
-    installed: true
-    version: 0.1.0
-    values:
-      - ./charts/service/imageprocessing/values.yaml
-
-  
   - name: jalsoochak-frontend
     chart: ./charts/service/jalsoochak-frontend
     installed: true
@@ -113,20 +83,6 @@ releases:
     values:
       - ./charts/service/jalsoochak-frontend/values.yaml
   
-  - name: messaging-orchestrator-service
-    chart: ./charts/service/messaging-orchestrator-service
-    installed: true
-    version: 0.1.0
-    values:
-      - ./charts/service/messaging-orchestrator-service/values.yaml
- 
-  - name: water-supply-calculation-service
-    chart: ./charts/service/water-supply-calculation-service
-    installed: true
-    version: 0.1.0
-    values:
-      - ./charts/service/water-supply-calculation-service/values.yaml
-
   - name: anomaly-service
     chart: ./charts/service/anomaly-service
     installed: true
@@ -176,18 +132,25 @@ releases:
     values:
       - ./charts/service/analytics-service/values.yaml
  
-  # - name: mysql
-  #   chart: groundhog2k/mysql
-  #   values:
-  #     - ./charts/service/mysql/values.yaml
+  - name: postgresql
+    installed: true
+    chart: ./charts/service/postgresql
+    version: 11.9.13
+    values:
+      - ./charts/service/postgresql/values.yaml
+      - global:
+          postgresql:
+            auth:
+              postgresPassword: {{ .Values.secrets.db.password | quote }}
 
-  # - name: minio
-  #   installed: true
-  #   chart: ./charts/service/minio
-  #   version: 13.3.1
-  #   <<: *default
-  #   values:
-  #     - ./charts/service/minio/values.yaml
+  - name: minio
+    installed: true
+    chart: ./charts/service/minio
+    version: 13.3.1
+    <<: *default
+    values:
+      - ./charts/service/minio/values.yaml
+      - ./charts/service/minio/values-ingress.gotmpl
 
   - name: redis
     installed: true

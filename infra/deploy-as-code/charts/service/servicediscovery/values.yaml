@@ -44,16 +44,6 @@ env: |
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
     value: "http://keycloak:80/keycloak"
-  - name: KEYCLOAK_CREDENTIALS_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: keycloak-credential-secret
-        name: jalsoochak
-  - name: KEYCLOAK_ADMIN_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        key: keycloak-admin-client-secret
-        name: jalsoochak
   - name: SPRING_MAIL_USERNAME
     valueFrom:
       secretKeyRef:

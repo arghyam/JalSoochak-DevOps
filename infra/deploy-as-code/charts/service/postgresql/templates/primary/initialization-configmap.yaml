@@ -1,0 +1,22 @@
+{{- if or .Values.primary.initdb.scripts (not (empty (.Files.Glob "init-scripts/*.sql"))) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ printf "%s-init-scripts" (include "postgresql.primary.fullname" .) }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+data:
+{{- if .Values.primary.initdb.scripts }}
+{{- include "common.tplvalues.render" (dict "value" .Values.primary.initdb.scripts "context" .) | nindent 2 }}
+{{- end }}
+{{- range $path, $_ := .Files.Glob "init-scripts/*.sql" }}
+  {{ base $path }}: |-
+{{ $.Files.Get $path | indent 4 }}
+{{- end }}
+{{- end }}
