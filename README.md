@@ -56,6 +56,9 @@ sops -d charts/environments/dev-secret.yaml | kubectl apply -f -
 #### 3. Deploy Services
 To deploy the entire stack to the development environment:
 ```bash
+helmfile apply -f postgres-helmfile.yaml
+```
+```bash
 helmfile apply -f jalsoochak-helmfile.yaml
 ```
 
