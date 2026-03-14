@@ -10,6 +10,8 @@ ingress:
   contexts:
     - "api/v1/auth"
     - "api/v1/users"
+    - "api/v1/state-admin/pump-operators"
+    - "api/v1/tenant/user"
 # Init Containers Configs
 
 # Container Configs
