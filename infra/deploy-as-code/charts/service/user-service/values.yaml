@@ -12,6 +12,7 @@ ingress:
     - "api/v1/users"
     - "api/v1/state-admin/pump-operators"
     - "api/v1/tenant/user"
+    - "api/v1/pumpoperator"
 # Init Containers Configs
 
 # Container Configs
