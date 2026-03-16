@@ -20,7 +20,7 @@ replicas: "1"
 #   enabled: true
 #   livenessProbePath: "/management-service/health"
 #   readinessProbePath: "/management-service/health"
-
+httpPort: 8761
 # Additional Container Envs
 env: |
   - name: SERVER_PORT

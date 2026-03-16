@@ -10,6 +10,9 @@ ingress:
   contexts:
     - "api/v1/auth"
     - "api/v1/users"
+    - "api/v1/state-admin/pump-operators"
+    - "api/v1/tenant/user"
+    - "api/v1/pumpoperator"
 # Init Containers Configs
 
 # Container Configs
@@ -73,7 +76,7 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: FRONTEND_BASE_URL
-    value: "http://localhost:3000/"
+    value: "https://jalsoochak.beehyv.com"
   - name: CORS_ALLOWED_ORIGINS
     value: "http://localhost:3000/, https://jalsoochak.beehyv.com"
   - name: KEYCLOAK_CLIENT_ID

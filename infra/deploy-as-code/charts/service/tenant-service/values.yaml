@@ -15,7 +15,7 @@ ingress:
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/tenant-service"
-  tag: "477748424ae85a5e63235ceb152764c5744bdb86"
+  tag: "b7ff977047c2fc3ee8d74b88da5450fc7bd7864f"
 replicas: "1"
 # tracing-enabled: true
 # healthChecks:

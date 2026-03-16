@@ -36,10 +36,9 @@ Navigate to the deployment directory:
 cd infra/deploy-as-code
 ```
 
-#### 1. Create Namespace
-Ensure the target namespace exists:
+#### 1. Deploy Postgres
 ```bash
-kubectl create namespace jalsoochak-dev --dry-run=client -o yaml | kubectl apply -f -
+helmfile apply -f prostgres-helmfile.yaml
 ```
 
 #### 2. Create Secret and ConfigMap
@@ -52,9 +51,19 @@ kubectl apply -f charts/environments/dev-cm.yaml
 # Decrypt and apply Secrets
 sops -d charts/environments/dev-secret.yaml | kubectl apply -f -
 ```
+### 3. Deploy Cronjob
+To deploy cronjob which pull latest aws ecr secret, 
+First update schedule: "0 */6 * * *" to "* * * * *".
+```bash
+kubectl apply -f charts/cronjob/ecr-cred-helper.yaml
+```
+Note: This need to be reverted latter.
 
-#### 3. Deploy Services
+#### 4. Deploy Services
 To deploy the entire stack to the development environment:
+```bash
+helmfile apply -f postgres-helmfile.yaml
+```
 ```bash
 helmfile apply -f jalsoochak-helmfile.yaml
 ```
