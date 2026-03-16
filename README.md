@@ -36,13 +36,18 @@ Navigate to the deployment directory:
 cd infra/deploy-as-code
 ```
 
-#### 1. Deploy Postgres
+#### 1. Deploy Postgres & Minio
 ```bash
 helmfile apply -f prostgres-helmfile.yaml
 ```
+```bash
+helmfile apply -f jalsoochak-helmfile.yaml
+```
+Note: Postgres and minio can be deployment outside cluster.
 
 #### 2. Create Secret and ConfigMap
-Before running `helmfile apply`, create the necessary Kubernetes secrets and configmaps:
+Before running `helmfile apply`, Update minio and postgres credential in secrets
+create the necessary Kubernetes secrets and configmaps:
 
 ```bash
 # Apply ConfigMap
@@ -57,13 +62,10 @@ First update schedule: "0 */6 * * *" to "* * * * *".
 ```bash
 kubectl apply -f charts/cronjob/ecr-cred-helper.yaml
 ```
-Note: This need to be reverted latter.
+Note: This need to be reverted later.
 
 #### 4. Deploy Services
 To deploy the entire stack to the development environment:
-```bash
-helmfile apply -f postgres-helmfile.yaml
-```
 ```bash
 helmfile apply -f jalsoochak-helmfile.yaml
 ```
