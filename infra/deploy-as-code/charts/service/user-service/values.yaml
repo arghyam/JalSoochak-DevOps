@@ -28,6 +28,10 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
+  - name: JAVA_OPTS
+    value: -Xmx192m -Xms192m
+  - name: JAVA_OPTS
+    value: -Xmx192m -Xms192m
   - name: spring.flyway.baseline-on-migrate
     value: "true"
   - name: SERVER_PORT
