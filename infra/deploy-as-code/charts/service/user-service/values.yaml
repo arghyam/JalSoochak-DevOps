@@ -50,7 +50,7 @@ env: |
         key: password
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
-    value: "https://jalsoochak.beehyv.com/keycloak"
+    value: "https://staging.jalsoochak.in/keycloak"
   - name: SPRING_MAIL_USERNAME
     valueFrom:
       secretKeyRef:
@@ -76,9 +76,9 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: FRONTEND_BASE_URL
-    value: "https://jalsoochak.beehyv.com"
+    value: "https://staging.jalsoochak.in"
   - name: CORS_ALLOWED_ORIGINS
-    value: "http://localhost:3000/, https://jalsoochak.beehyv.com"
+    value: "http://localhost:3000/, https://staging.jalsoochak.in"
   - name: KEYCLOAK_CLIENT_ID
     value: "jalsoochak-app"
   - name: KEYCLOAK_CLIENT_SECRET
