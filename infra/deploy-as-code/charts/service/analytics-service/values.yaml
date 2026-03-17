@@ -9,29 +9,6 @@ labels:
 #   zuul: true
 #   context: "api/v2/auth(/|$)(.*)"
 # # Init Containers Configs
-initContainers:
-  dbMigration:
-    enabled: true
-    schemaTable: "analytics_service_schema"
-    image:
-      repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/analytics-service-db"
-      tag: "3ccbe2652f50c4eb86b0604abb7dc9b9dd76fff3"
-    env: |
-        - name: "SPRING_DATASOURCE_URL"
-          valueFrom:
-            secretKeyRef:
-              key: analytics-db-url
-              name: jalsoochak
-        - name: "SPRING_DATASOURCE_USERNAME"
-          valueFrom:  
-            secretKeyRef:
-              key: username
-              name: jalsoochak
-        - name: "SPRING_DATASOURCE_PASSWORD"
-          valueFrom:
-            secretKeyRef:
-              key: password
-              name: jalsoochak
 
 # Container Configs
 image:
