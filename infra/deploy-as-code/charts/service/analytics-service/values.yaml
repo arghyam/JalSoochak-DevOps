@@ -4,11 +4,10 @@ labels:
   group: "core"
 
 
-# ingress:
-#   enabled: true
-#   zuul: true
-#   context: "api/v2/auth(/|$)(.*)"
-# # Init Containers Configs
+ingress:
+  enabled: true
+  context: "api/v1/analytics"
+# Init Containers Configs
 
 # Container Configs
 image:
