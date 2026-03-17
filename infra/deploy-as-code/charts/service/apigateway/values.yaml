@@ -51,3 +51,22 @@ env: |
     value: "10"
   - name: RATE_LIMIT_BURST_CAPACITY
     value: "20"
+  - name: KEYCLOAK_AUTH_SERVER_URL
+    value: "https://jalsoochak.beehyv.com/keycloak"
+  - name: KEYCLOAK_CLIENT_ID
+    value: "jalsoochak-app"
+  - name: KEYCLOAK_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-credential-secret
+        name: jalsoochak
+  - name: KEYCLOAK_PUBLIC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-public-key
+        name: jalsoochak
+  - name: KEYCLOAK_ISSUER_URI
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-issuer-uri
+        name: jalsoochak
