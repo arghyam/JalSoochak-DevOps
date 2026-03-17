@@ -52,7 +52,7 @@ env: |
   - name: RATE_LIMIT_BURST_CAPACITY
     value: "20"
   - name: KEYCLOAK_AUTH_SERVER_URL
-    value: "https://jalsoochak.beehyv.com/keycloak"
+    value: "https://staging.jalsoochak.in/keycloak"
   - name: KEYCLOAK_CLIENT_ID
     value: "jalsoochak-app"
   - name: KEYCLOAK_CLIENT_SECRET
