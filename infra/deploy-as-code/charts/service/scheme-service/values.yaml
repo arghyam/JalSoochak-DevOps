@@ -73,5 +73,17 @@ env: |
       secretKeyRef:
         key: keycloak-public-key
         name: jalsoochak
+  - name: KEYCLOAK_CLIENT_ID
+    value: "jalsoochak-app"
+  - name: KEYCLOAK_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-credential-secret
+        name: jalsoochak
+  - name: KEYCLOAK_ISSUER_URI
+    valueFrom:
+      secretKeyRef:
+        key: keycloak-issuer-uri
+        name: jalsoochak
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
