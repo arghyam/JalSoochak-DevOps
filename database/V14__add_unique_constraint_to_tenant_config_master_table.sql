@@ -4,5 +4,4 @@
 -- ============================================================
 
 ALTER TABLE common_schema.tenant_config_master_table
-    ADD CONSTRAINT uq_tenant_config_tenant_id_config_key
-    UNIQUE (tenant_id, config_key);
+ADD CONSTRAINT uq_tenant_config_tenant_id_config_key UNIQUE (tenant_id, config_key);

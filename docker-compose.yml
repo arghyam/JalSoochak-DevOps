@@ -5,7 +5,7 @@ services:
   # Infrastructure Services
   # ==========================================
   postgres:
-    image: postgres:11.9
+    image: postgis/postgis:15-3.5-alpine
     container_name: jalsoochak_postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -25,13 +25,15 @@ services:
   redis:
     image: bitnamilegacy/redis:7.2.4
     container_name: jalsoochak_redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "6379:6379"
     networks:
       - jalsoochak_net
 
   kafka:
-    image: bitnamilegacy/kafka:3.7.0
+    image: bitnamilegacy/kafka:4.0.0-debian-12-r10
     container_name: jalsoochak_kafka
     environment:
       - KAFKA_CFG_NODE_ID=1
@@ -54,7 +56,7 @@ services:
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-password}
       MINIO_DEFAULT_BUCKETS: escalation-reports
     ports:
-      - "9000:9000"
+      - "9002:9000"
       - "9001:9001"
     volumes:
       - minio_data:/data
@@ -62,39 +64,43 @@ services:
       - jalsoochak_net
 
   keycloak:
-    image: bitnamilegacy/keycloak:25.2.0
-    container_name: jalsoochak_keycloak
+    image: quay.io/keycloak/keycloak:23.0.7
+    container_name: keycloak
     environment:
-      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN:-admin}
-      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}
-      - KC_DB=postgres
-      - KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak
-      - KC_DB_SCHEMA=public
-      - KC_DB_USERNAME=${POSTGRES_USER:-postgres}
-      - KC_DB_PASSWORD=${POSTGRES_PASSWORD:-postgres}
-      - KC_HOSTNAME_STRICT=false
-      - KC_HTTP_ENABLED=true
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/bitnami_keycloak
+      KC_DB_USERNAME: ${POSTGRES_USER:-postgres}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+
+      KC_LOG_LEVEL: info
+      KC_METRICS_ENABLED: true
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
     command: start-dev
-    ports:
-      - "8080:8080"
     depends_on:
       - postgres
+    ports:
+      - 8080:8080
     networks:
       - jalsoochak_net
-
   # ==========================================
   # Core Platform Services
   # ==========================================
   servicediscovery:
     image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/servicediscoveryserver:7379cff732298df677ea6e750e12a4763a480f73
-    container_name: jalsoochak_servicediscovery
     environment:
       SERVER_PORT: "8761"
       SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka:9092"
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/jalsoochak"
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      KEYCLOAK_AUTH_SERVER_URL: "http://keycloak:8080/keycloak"
+      KEYCLOAK_AUTH_SERVER_URL: "http://keycloak:8080"
       SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
       SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
       MAIL_FROM_EMAIL: ${MAIL_ID}
@@ -109,39 +115,12 @@ services:
     networks:
       - jalsoochak_net
 
-  apigateway:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/apigateway:gateway-test-1
-    container_name: jalsoochak_apigateway
-    environment:
-      SERVER_PORT: "8080"
-      EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: "http://servicediscovery:8761/eureka"
-      EUREKA_URL: "http://servicediscovery:8761/eureka/"
-      EUREKA_ENABLED: "true"
-      TENANT_SERVICE_URI: "http://tenant-service:8080"
-      USER_SERVICE_URI: "http://user-service:8080"
-      ANOMALY_SERVICE_URI: "http://anomaly-service:8080"
-      TELEMETRY_SERVICE_URI: "http://telemetry-service:8080"
-      MESSAGE_SERVICE_URI: "http://message-service:8080"
-      SCHEME_SERVICE_URI: "http://scheme-service:8080"
-      ANALYTICS_SERVICE_URI: "http://analytics-service:8080"
-      CORS_ALLOWED_ORIGINS: "*"
-      KEYCLOAK_AUTH_SERVER_URL: "http://keycloak:8080/keycloak"
-      KEYCLOAK_CLIENT_ID: "jalsoochak-app"
-      KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CREDENTIAL_SECRET}
-      KEYCLOAK_PUBLIC_KEY: ${KEYCLOAK_PUBLIC_KEY}
-      KEYCLOAK_ISSUER_URI: "http://keycloak:8080/keycloak/realms/jalsoochak"
-    ports:
-      - "8081:8080" # Exposed on 8081 to avoid conflict with Keycloak
-    depends_on:
-      - servicediscovery
-    networks:
-      - jalsoochak_net
 
   # ==========================================
   # Application Services
   # ==========================================
   tenant-service:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/tenant-service:b7ff977047c2fc3ee8d74b88da5450fc7bd7864f
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/tenant-service:b2eaabb3ee84ce1a8326fb06f88c1c5a6a450bbb
     container_name: jalsoochak_tenant_service
     environment: &common-spring-env
       SERVER_PORT: "8080"
@@ -150,7 +129,7 @@ services:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/jalsoochak"
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      KEYCLOAK_AUTH_SERVER_URL: "http://keycloak:8080/keycloak"
+      KEYCLOAK_AUTH_SERVER_URL: "http://keycloak:8080"
       SPRING_MAIL_USERNAME: ${MAIL_USERNAME}
       SPRING_MAIL_PASSWORD: ${MAIL_PASSWORD}
       MAIL_FROM_EMAIL: ${MAIL_ID}
@@ -159,7 +138,7 @@ services:
       KEYCLOAK_PUBLIC_KEY: ${KEYCLOAK_PUBLIC_KEY}
       KEYCLOAK_CLIENT_ID: "jalsoochak-app"
       KEYCLOAK_CLIENT_SECRET: ${KEYCLOAK_CREDENTIAL_SECRET}
-      KEYCLOAK_ISSUER_URI: "http://keycloak:8080/keycloak/realms/jalsoochak"
+      KEYCLOAK_ISSUER_URI: "http://keycloak:8080/realms/jalsoochak"
       EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: "http://servicediscovery:8761/eureka"
       SPRING_DATA_REDIS_HOST: "redis"
       SPRING_DATA_REDIS_PORT: "6379"
@@ -172,7 +151,7 @@ services:
       - jalsoochak_net
 
   user-service:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/user-service:bb1931f8fe14264544db5b7b5d8f621d7f71f411
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/user-service:b2eaabb3ee84ce1a8326fb06f88c1c5a6a450bbb
     container_name: jalsoochak_user_service
     environment:
       <<: *common-spring-env
@@ -189,7 +168,7 @@ services:
       - jalsoochak_net
 
   anomaly-service:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/anomaly-service:9861938335d32696ad8efaa0917779f69bc102d8
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/anomaly-service:3ccbe2652f50c4eb86b0604abb7dc9b9dd76fff3
     container_name: jalsoochak_anomaly_service
     environment:
       <<: *common-spring-env
@@ -201,7 +180,7 @@ services:
       - jalsoochak_net
 
   scheme-service:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/scheme-service:d7ea88db4b8b17ed36dbacd6b3dab7b0ad5e1f4c
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/scheme-service:e3ff01ff59396faabef3884152ca96771daa35d8
     container_name: jalsoochak_scheme_service
     environment:
       <<: *common-spring-env
@@ -213,11 +192,11 @@ services:
       - jalsoochak_net
 
   analytics-service:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/analytics-service:53ec3ee728c05e8ada1d6d5deaf7e9f92f702669
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/analytics-service:4b43db977a53c6533e869955a17b827dd15aa864
     container_name: jalsoochak_analytics_service
     environment:
       <<: *common-spring-env
-      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: "http://keycloak:8080/keycloak/realms/jalsoochak"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: "http://keycloak:8080/realms/jalsoochak"
     depends_on:
       - postgres
       - kafka
@@ -227,7 +206,7 @@ services:
       - jalsoochak_net
 
   message-service:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/message-service:58e68dad38c33eb22faa9c82ee5731c27e96af3c
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/message-service:3ccbe2652f50c4eb86b0604abb7dc9b9dd76fff3
     container_name: jalsoochak_message_service
     environment:
       <<: *common-spring-env
@@ -254,7 +233,7 @@ services:
       - jalsoochak_net
 
   telemetry-service:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/telemetry-service:6bca4f49994026eb4b569933744273101722eddd
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/telemetry-service:064cd23e3798520b6dd571273b11ec98d1ad3f00
     container_name: jalsoochak_telemetry_service
     environment:
       <<: *common-spring-env
@@ -271,24 +250,24 @@ services:
     networks:
       - jalsoochak_net
 
-  flowvision:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/arghyam/flowvision:1.0.1
-    container_name: jalsoochak_flowvision
-    environment:
-      FLOWVISION_DB_USERNAME: ${POSTGRES_USER:-postgres}
-      FLOWVISION_DB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      FLOWVISION_DB_HOST: "postgres"
-      FLOWVISION_DB_PORT: "5432"
-      FLOWVISION_DB_NAME: "jalsoochak"
-    ports:
-      - "8000:8000"
-    depends_on:
-      - postgres
-    networks:
-      - jalsoochak_net
+  # flowvision:
+  #   image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/arghyam/flowvision:1.0.1
+  #   container_name: jalsoochak_flowvision
+  #   environment:
+  #     FLOWVISION_DB_USERNAME: ${POSTGRES_USER:-postgres}
+  #     FLOWVISION_DB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+  #     FLOWVISION_DB_HOST: "postgres"
+  #     FLOWVISION_DB_PORT: "5432"
+  #     FLOWVISION_DB_NAME: "jalsoochak"
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - jalsoochak_net
 
   jalsoochak-frontend:
-    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/jalsoochak-frontend:675cba8da7afdf742f6c24ca4549dc3c3a2d5393
+    image: 252649026375.dkr.ecr.ap-south-1.amazonaws.com/jalsoochak-frontend:86e8d739a2bd3bb8ab1e7d1ddae0841945bd4c29
     container_name: jalsoochak_frontend
     # Note: Volume mounting would require the actual config.js to be present
     # volumes:

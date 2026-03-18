@@ -80,4 +80,3 @@ BEGIN
         EXECUTE patched_definition;
     END IF;
 END $$;
-

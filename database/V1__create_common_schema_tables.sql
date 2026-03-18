@@ -15,6 +15,7 @@ SET search_path TO common_schema;
 --    admin_level FK is added later via ALTER TABLE.
 -- ============================================================
 
+
 CREATE TABLE common_schema.tenant_admin_user_master_table (
     id                          SERIAL          PRIMARY KEY,
     uuid                        VARCHAR(36)     NOT NULL UNIQUE DEFAULT gen_random_uuid()::TEXT,
@@ -45,6 +46,7 @@ CREATE TABLE common_schema.tenant_admin_user_master_table (
 -- 2. user_type_master_table
 -- ============================================================
 
+
 CREATE TABLE common_schema.user_type_master_table (
     id              SERIAL          PRIMARY KEY,
     uuid            VARCHAR(36)     NOT NULL UNIQUE DEFAULT gen_random_uuid()::TEXT,
@@ -67,6 +69,7 @@ CREATE TABLE common_schema.user_type_master_table (
 -- ============================================================
 -- 3. tenant_master_table
 -- ============================================================
+
 
 CREATE TABLE common_schema.tenant_master_table (
     id              SERIAL          PRIMARY KEY,
@@ -95,6 +98,7 @@ CREATE TABLE common_schema.tenant_master_table (
 -- 4. tenant_config_master_table
 -- ============================================================
 
+
 CREATE TABLE common_schema.tenant_config_master_table (
     id              SERIAL          PRIMARY KEY,
     uuid            VARCHAR(36)     NOT NULL UNIQUE DEFAULT gen_random_uuid()::TEXT,
@@ -121,6 +125,7 @@ CREATE TABLE common_schema.tenant_config_master_table (
 -- ============================================================
 -- 5. channel_master_table
 -- ============================================================
+
 
 CREATE TABLE common_schema.channel_master_table (
     id              SERIAL          PRIMARY KEY,
@@ -151,18 +156,20 @@ CREATE TABLE common_schema.channel_master_table (
 
 -- admin_level -> user_type_master_table
 ALTER TABLE common_schema.tenant_admin_user_master_table
-    ADD CONSTRAINT fk_admin_user_admin_level
-    FOREIGN KEY (admin_level) REFERENCES common_schema.user_type_master_table(id);
+ADD CONSTRAINT fk_admin_user_admin_level FOREIGN KEY (admin_level) REFERENCES common_schema.user_type_master_table (id);
 
 -- ============================================================
 -- Indexes for frequently queried columns
 -- ============================================================
 
-CREATE INDEX idx_tenant_master_state_code     ON common_schema.tenant_master_table(state_code);
-CREATE INDEX idx_tenant_master_lgd_code       ON common_schema.tenant_master_table(lgd_code);
-CREATE INDEX idx_tenant_master_status         ON common_schema.tenant_master_table(status);
+CREATE INDEX idx_tenant_master_state_code ON common_schema.tenant_master_table (state_code);
 
-CREATE INDEX idx_admin_user_tenant_id         ON common_schema.tenant_admin_user_master_table(tenant_id);
-CREATE INDEX idx_admin_user_status            ON common_schema.tenant_admin_user_master_table(status);
+CREATE INDEX idx_tenant_master_lgd_code ON common_schema.tenant_master_table (lgd_code);
 
-CREATE INDEX idx_tenant_config_tenant_id      ON common_schema.tenant_config_master_table(tenant_id);
+CREATE INDEX idx_tenant_master_status ON common_schema.tenant_master_table (status);
+
+CREATE INDEX idx_admin_user_tenant_id ON common_schema.tenant_admin_user_master_table (tenant_id);
+
+CREATE INDEX idx_admin_user_status ON common_schema.tenant_admin_user_master_table (status);
+
+CREATE INDEX idx_tenant_config_tenant_id ON common_schema.tenant_config_master_table (tenant_id);
