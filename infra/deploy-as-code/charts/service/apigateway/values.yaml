@@ -12,7 +12,6 @@ ingress:
     - "swagger-ui/**"
     - "swagger-resources"
     - "v3/api-docs"
-    - "v3/api-docs/**"
     - "webjars/**"
     - "user/**"
     - "tenant/**"
@@ -20,7 +19,6 @@ ingress:
     - "message/**"
     - "scheme/**"
     - "analytics/**"
-    - "anomaly/**"
 # Init Containers Configs
 
 # Container Configs
