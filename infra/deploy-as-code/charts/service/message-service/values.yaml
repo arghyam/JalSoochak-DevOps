@@ -137,4 +137,4 @@ env: |
         key: glific-password
         name: glific
   - name: GLIFIC_LOGIN_OTP_TEMPLATE_ID
-    value: "839378"
+    value: "702101"
