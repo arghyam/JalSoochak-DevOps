@@ -9,9 +9,18 @@ ingress:
   zuul: true
   contexts:
     - "swagger-ui.html"
+    - "swagger-ui/**"
     - "swagger-resources"
     - "v3/api-docs"
-    - "webjars"
+    - "v3/api-docs/**"
+    - "webjars/**"
+    - "user/**"
+    - "tenant/**"
+    - "telemetry/**"
+    - "message/**"
+    - "scheme/**"
+    - "analytics/**"
+    - "anomaly/**"
 # Init Containers Configs
 
 # Container Configs
