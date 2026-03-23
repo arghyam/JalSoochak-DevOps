@@ -120,3 +120,5 @@ env: |
       secretKeyRef:
         key: endpoint
         name: minio
+  - name: STORAGE_ENABLED
+    value: 'true'
