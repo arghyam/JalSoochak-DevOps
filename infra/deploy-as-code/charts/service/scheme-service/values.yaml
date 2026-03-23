@@ -6,7 +6,6 @@ labels:
 
 ingress:
   enabled: true
-  # zuul: true
   contexts:
     - "api/v1/public"
     - "api/v1/scheme"

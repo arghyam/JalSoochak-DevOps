@@ -93,3 +93,30 @@ env: |
     value: "6379"
   - name: SPRING_DATA_REDIS_HOST
     value: "redis"
+  - name: STORAGE_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: STORAGE_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: accessKey
+        name: minio
+  - name: STORAGE_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: secretKey
+        name: minio
+  - name: STORAGE_REGION
+    valueFrom:
+      secretKeyRef:
+        key: region
+        name: minio
+  - name: STORAGE_BUCKET
+    value: "escalation-reports"
+  - name: STORAGE_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
