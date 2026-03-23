@@ -114,7 +114,7 @@ env: |
         key: region
         name: minio
   - name: STORAGE_BUCKET
-    value: "escalation-reports"
+    value: "tenant-assets"
   - name: STORAGE_BASE_URL
     valueFrom:
       secretKeyRef:
