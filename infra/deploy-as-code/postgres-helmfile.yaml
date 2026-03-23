@@ -26,4 +26,4 @@ releases:
       - global:
           postgresql:
             auth:
-              postgresPassword: {{ .Values.secrets.db.password | quote }}
+              postgresPassword: "{{ .Values.secrets.db.password | quote }}"
