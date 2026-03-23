@@ -23,6 +23,8 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
+  - name: NOTIFICATIONS_DRY_RUN
+    value: "true"
   - name: JAVA_OPTS
     value: -Xmx192m -Xms192m
   - name: SERVER_PORT
