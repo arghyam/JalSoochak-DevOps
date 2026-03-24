@@ -41,7 +41,7 @@ jobs:
       - name: Install Helmfile
         uses: helmfile/helmfile-action@v1.9.0
         with:
-          helmfile-version: v1.4.2
+          helmfile-version: v1.4.1
           helm-plugins: >
             https://github.com/databus23/helm-diff --verify=false
             
