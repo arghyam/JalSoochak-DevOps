@@ -102,3 +102,13 @@ env: |
       secretKeyRef:
         key: keycloak-issuer-uri
         name: jalsoochak
+  - name: OTP_EXPIRY_MINUTES
+    value: "5"
+  - name: OTP_MAX_ATTEMPTS
+    value: "3"
+  - name: OTP_COOLDOWN_SECONDS
+    value: "60"
+  - name: OTP_LENGTH
+    value: "6"
+  - name: OTP_DELIVERY_CHANNEL
+    value: "WHATSAPP"

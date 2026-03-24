@@ -210,7 +210,7 @@ services:
     container_name: jalsoochak_message_service
     environment:
       <<: *common-spring-env
-      GLIFIC_NUDGE_TEMPLATE_ID: "829747"
+      GLIFIC_NUDGE_TEMPLATE_ID: "7986"
       GLIFIC_ESCALATION_TEMPLATE_ID: "829817"
       GLIFIC_NUDGE_FLOW_ID: "37300"
       GLIFIC_WELCOME_FLOW_ID: "3733453"
