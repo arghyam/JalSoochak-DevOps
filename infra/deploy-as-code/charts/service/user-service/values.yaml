@@ -112,3 +112,18 @@ env: |
     value: "6"
   - name: OTP_DELIVERY_CHANNEL
     value: "WHATSAPP"
+  - name: PII_ENCRYPTION_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-encryption-key
+        name: jalsoochak
+  - name: PII_HMAC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-hmac-key
+        name: jalsoochak
+  - name: STAFF_MANAGED_PASSWORD_KEY
+    valueFrom:
+      secretKeyRef:
+        key: staff-managed-password-key
+        name: jalsoochak

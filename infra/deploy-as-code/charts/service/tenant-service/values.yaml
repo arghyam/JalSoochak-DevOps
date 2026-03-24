@@ -122,3 +122,13 @@ env: |
         name: minio
   - name: STORAGE_ENABLED
     value: 'true'
+  - name: PII_ENCRYPTION_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-encryption-key
+        name: jalsoochak
+  - name: PII_HMAC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-hmac-key
+        name: jalsoochak
