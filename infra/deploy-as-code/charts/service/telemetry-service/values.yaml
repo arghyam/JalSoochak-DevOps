@@ -113,3 +113,13 @@ env: |
         name: minio
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
+  - name: PII_ENCRYPTION_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-encryption-key
+        name: jalsoochak
+  - name: PII_HMAC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-hmac-key
+        name: jalsoochak
