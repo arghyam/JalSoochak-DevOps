@@ -28,8 +28,10 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
-  - name: JAVA_OPTS
-    value: -Xmx192m -Xms192m
+  - name: SPRING_HIKARI_MINIMUM_IDLE
+    value: "20"
+  - name: SPRING_HIKARI_MAXIMUM_POOL_SIZE
+    value: "60"
   - name: JAVA_OPTS
     value: -Xmx192m -Xms192m
   - name: spring.flyway.baseline-on-migrate
