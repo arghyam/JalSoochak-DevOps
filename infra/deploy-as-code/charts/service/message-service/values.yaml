@@ -23,6 +23,10 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
+  - name: NOTIFICATIONS_DRY_RUN
+    value: "true"
+  - name: JAVA_OPTS
+    value: -Xmx192m -Xms192m
   - name: SERVER_PORT
     value: "8080"
   - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
@@ -86,7 +90,7 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: GLIFIC_NUDGE_TEMPLATE_ID
-    value: "829747"
+    value: "7986"
   - name: GLIFIC_ESCALATION_TEMPLATE_ID
     value: "829817"
   - name: GLIFIC_NUDGE_FLOW_ID
@@ -134,3 +138,5 @@ env: |
       secretKeyRef:
         key: glific-password
         name: glific
+  - name: GLIFIC_LOGIN_OTP_TEMPLATE_ID
+    value: "702101"

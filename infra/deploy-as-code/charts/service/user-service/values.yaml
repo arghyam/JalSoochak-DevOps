@@ -28,6 +28,12 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
+  - name: SPRING_HIKARI_MINIMUM_IDLE
+    value: "20"
+  - name: SPRING_HIKARI_MAXIMUM_POOL_SIZE
+    value: "60"
+  - name: JAVA_OPTS
+    value: -Xmx192m -Xms192m
   - name: spring.flyway.baseline-on-migrate
     value: "true"
   - name: SERVER_PORT
@@ -97,4 +103,29 @@ env: |
     valueFrom:
       secretKeyRef:
         key: keycloak-issuer-uri
+        name: jalsoochak
+  - name: OTP_EXPIRY_MINUTES
+    value: "5"
+  - name: OTP_MAX_ATTEMPTS
+    value: "3"
+  - name: OTP_COOLDOWN_SECONDS
+    value: "60"
+  - name: OTP_LENGTH
+    value: "6"
+  - name: OTP_DELIVERY_CHANNEL
+    value: "WHATSAPP"
+  - name: PII_ENCRYPTION_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-encryption-key
+        name: jalsoochak
+  - name: PII_HMAC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-hmac-key
+        name: jalsoochak
+  - name: STAFF_MANAGED_PASSWORD_KEY
+    valueFrom:
+      secretKeyRef:
+        key: staff-managed-password-key
         name: jalsoochak

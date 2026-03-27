@@ -25,6 +25,8 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
+  - name: JAVA_OPTS
+    value: -Xmx192m -Xms192m
   - name: SERVER_PORT
     value: "8080"
   - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
@@ -91,3 +93,42 @@ env: |
     value: "6379"
   - name: SPRING_DATA_REDIS_HOST
     value: "redis"
+  - name: STORAGE_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: STORAGE_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: accessKey
+        name: minio
+  - name: STORAGE_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: secretKey
+        name: minio
+  - name: STORAGE_REGION
+    valueFrom:
+      secretKeyRef:
+        key: region
+        name: minio
+  - name: STORAGE_BUCKET
+    value: "tenant-assets"
+  - name: STORAGE_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: STORAGE_ENABLED
+    value: 'true'
+  - name: PII_ENCRYPTION_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-encryption-key
+        name: jalsoochak
+  - name: PII_HMAC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-hmac-key
+        name: jalsoochak
