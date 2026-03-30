@@ -10,10 +10,12 @@ This guide outlines the steps to deploy the Jalsoochak services to the developme
 
 Ensure you have the following tools installed:
 - `kubectl`
-- `helm`
-- `helmfile`
+- `helm` (≥3.x)
+- `helmfile` (≥1.0, tested on **1.4.x**)
 - `sops`
 - `age`
+
+> **Note:** Helmfile 1.x uses `.yaml.gotmpl` files and requires an `environments:` block for template variable resolution. The helmfiles in this repo (`*.yaml.gotmpl`) are compatible with helmfile ≥1.0.
 
 ### Configuration
 
@@ -38,10 +40,10 @@ cd infra/deploy-as-code
 
 #### 1. Deploy Postgres & Minio
 ```bash
-helmfile apply -f prostgres-helmfile.yaml
+helmfile apply -f postgres-helmfile.yaml.gotmpl
 ```
 ```bash
-helmfile apply -f jalsoochak-helmfile.yaml
+elmfile apply -f jalsoochak-helmfile.yaml.gotmpl --selector name=minio
 ```
 Note: Postgres and minio can be deployment outside cluster.
 
@@ -56,33 +58,41 @@ kubectl apply -f charts/environments/dev-cm.yaml
 # Decrypt and apply Secrets
 sops -d charts/environments/dev-secret.yaml | kubectl apply -f -
 ```
-### 3. Deploy Cronjob
-To deploy cronjob which pull latest aws ecr secret, 
-First update schedule: "0 */6 * * *" to "* * * * *".
+
+#### 3. Deploy Cronjob
+To deploy the cronjob that pulls the latest AWS ECR credentials, first update the schedule to run every minute for the initial credential fetch:
 ```bash
+# Temporarily set schedule: "* * * * *" before applying
 kubectl apply -f charts/cronjob/ecr-cred-helper.yaml
 ```
-Note: This need to be reverted later.
+> **Note:** Revert the schedule back to `"0 */6 * * *"` after the initial run.
 
 #### 4. Deploy Services
 To deploy the entire stack to the development environment:
 ```bash
-helmfile apply -f jalsoochak-helmfile.yaml
+helmfile apply -f jalsoochak-helmfile.yaml.gotmpl
 ```
 
 This will:
-- Decrypt the secrets in `charts/environments/dev-secret.yaml`.
-- Merge them with the values in `charts/environments/jalsoochak-dev.yaml`.
-- Deploy all releases defined in `jalsoochak-helmfile.yaml`.
+- Load environment values from `charts/environments/dev-secret.yaml` and `charts/environments/dev.yaml` via the `environments.default` block.
+- Deploy all releases defined in `jalsoochak-helmfile.yaml.gotmpl`.
+
+#### Dry-run / Template Preview
+
+To preview rendered manifests without applying:
+```bash
+helmfile template -f jalsoochak-helmfile.yaml.gotmpl
+helmfile template -f postgres-helmfile.yaml.gotmpl
+```
 
 ### Verification
 
-After deployment, you can verify the status of the pods:
+After deployment, verify the status of the pods:
 ```bash
-kubectl get pods -n jalsoochak-dev
+kubectl get pods
 ```
 
 Check the ingress status to ensure services are accessible:
 ```bash
-kubectl get ingress -n jalsoochak-dev
+kubectl get ingress
 ```
