@@ -44,7 +44,7 @@ env: |
         key: password
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
-    value: "https://jalsoochak.beehyv.com/keycloak"
+    value: "http://keycloak:80/keycloak"
   - name: SPRING_MAIL_USERNAME
     valueFrom:
       secretKeyRef:
@@ -87,7 +87,7 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
-    value: "https://jalsoochak.beehyv.com/keycloak/realms/jalsoochak"
+    value: "http://keycloak:80/keycloak/realms/jalsoochak"
   - name: SPRING_DATA_REDIS_PORT
     value: "6379"
   - name: SPRING_DATA_REDIS_HOST
