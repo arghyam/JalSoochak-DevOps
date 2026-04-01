@@ -7,7 +7,7 @@ labels:
 ingress:
   enabled: true
   contexts:
-    - "api/v2/webhook"
+    - "api/v1/telemetry"
     - "api/publish"
 # Init Containers Configs
 
