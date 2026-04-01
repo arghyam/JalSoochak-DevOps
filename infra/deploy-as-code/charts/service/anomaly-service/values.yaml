@@ -4,10 +4,10 @@ labels:
   group: "core"
 
 
-# ingress:
-#   enabled: true
-#   zuul: true
-#   context: "api/v2/auth(/|$)(.*)"
+ingress:
+  enabled: true
+  # zuul: true
+  context: "api/v1/anomalies"
 # # Init Containers Configs
 
 # Container Configs

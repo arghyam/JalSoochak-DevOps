@@ -8,7 +8,7 @@ ingress:
   enabled: true
   contexts:
     - "api/v1/telemetry"
-    - "api/publish"
+    - "api/v1/publish"
 # Init Containers Configs
 
 # Container Configs
