@@ -141,4 +141,4 @@ env: |
   - name: GLIFIC_LOGIN_OTP_TEMPLATE_ID
     value: "702101"
   - name: APP_BASE_URL
-    value: "https://jalsoochak.beehyv.com"
+    value: "https://staging.jalsoochak.in"
