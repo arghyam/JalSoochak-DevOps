@@ -23,7 +23,3 @@ releases:
     version: 11.9.13
     values:
       - ./charts/service/postgresql/values.yaml
-      - global:
-          postgresql:
-            auth:
-              postgresPassword: "{{ .Values.secrets.db.password | quote }}"

@@ -1,3 +1,11 @@
+environments:
+  default:
+    values:
+      - ./charts/environments/jalsoochak-dev-secret.yaml
+      - ./charts/environments/jalsoochak-dev.yaml
+
+---
+
 repositories:
   - name: ingress-nginx
     url: https://kubernetes.github.io/ingress-nginx
@@ -7,17 +15,12 @@ repositories:
   - name: prometheus-community
     url: https://prometheus-community.github.io/helm-charts
 
-templates: 
+templates:
   default: &default
     missingFileHandler: Warn
-values:
-  - ./charts/environments/jalsoochak-dev-secret.yaml
-  - ./charts/environments/jalsoochak-dev.yaml
 
 helmDefaults:
-  args:
-    - --values
-    - ./charts/environments/jalsoochak-dev.yaml
+  createNamespace: true
 
 releases:
   - name: ingress-nginx
@@ -30,7 +33,7 @@ releases:
       - ./charts/service/ingress-nginx/values-domain.gotmpl
 
 
-  # Keycloak (Codecentric)
+  # Keycloak (Bitnami)
   - name: keycloak
     chart: bitnami/keycloak
     version: 25.2.0
@@ -44,6 +47,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/flowvision/values.yaml
+      - ./charts/service/flowvision/values-domain.gotmpl
 
   - name: cert-manager
     chart: ./charts/service/cert-manager
@@ -67,6 +71,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/apigateway/values.yaml
+      - ./charts/service/apigateway/values-domain.gotmpl
 
   - name: jalsoochak-frontend
     chart: ./charts/service/jalsoochak-frontend
@@ -74,6 +79,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/jalsoochak-frontend/values.yaml
+      - ./charts/service/jalsoochak-frontend/values-domain.gotmpl
   
   - name: anomaly-service
     chart: ./charts/service/anomaly-service
@@ -81,6 +87,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/anomaly-service/values.yaml
+      - ./charts/service/anomaly-service/values-domain.gotmpl
 
   - name: scheme-service
     chart: ./charts/service/scheme-service
@@ -88,6 +95,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/scheme-service/values.yaml
+      - ./charts/service/scheme-service/values-domain.gotmpl
 
   - name: telemetry-service
     chart: ./charts/service/telemetry-service
@@ -95,6 +103,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/telemetry-service/values.yaml
+      - ./charts/service/telemetry-service/values-domain.gotmpl
 
   - name: tenant-service
     chart: ./charts/service/tenant-service
@@ -102,6 +111,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/tenant-service/values.yaml
+      - ./charts/service/tenant-service/values-domain.gotmpl
 
   - name: user-service
     chart: ./charts/service/user-service
@@ -109,6 +119,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/user-service/values.yaml
+      - ./charts/service/user-service/values-domain.gotmpl
 
   - name: message-service
     chart: ./charts/service/message-service
@@ -116,6 +127,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/message-service/values.yaml
+      - ./charts/service/message-service/values-domain.gotmpl
 
   - name: analytics-service
     chart: ./charts/service/analytics-service
@@ -123,6 +135,7 @@ releases:
     version: 0.1.0
     values:
       - ./charts/service/analytics-service/values.yaml
+      - ./charts/service/analytics-service/values-domain.gotmpl
  
   - name: minio
     installed: true
