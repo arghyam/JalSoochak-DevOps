@@ -12,7 +12,7 @@ labels:
 
 # Container Configs
 image:
-  repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/servicediscoveryserver"
+  repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/service-discovery"
   tag: "7379cff732298df677ea6e750e12a4763a480f73"
 replicas: "1"
 # tracing-enabled: true
