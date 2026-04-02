@@ -1,5 +1,5 @@
 global:
-  domain: "jalsoochak.beehyv.com"
+  domain: "staging.jalsoochak.in"
 root-ingress:
   cert-issuer: "letsencrypt-prod"
 
