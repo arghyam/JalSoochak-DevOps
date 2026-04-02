@@ -24,7 +24,7 @@ replicas: "1"
 # Additional Container Envs
 env: |
   - name: NOTIFICATIONS_DRY_RUN
-    value: "true"
+    value: "false"
   - name: JAVA_OPTS
     value: -Xmx192m -Xms192m
   - name: SERVER_PORT
@@ -96,7 +96,7 @@ env: |
   - name: GLIFIC_NUDGE_FLOW_ID
     value: "37300"
   - name: GLIFIC_WELCOME_FLOW_ID
-    value: "3733453"
+    value: "37684"
   - name: MINIO_ENDPOINT
     valueFrom:
       secretKeyRef:
