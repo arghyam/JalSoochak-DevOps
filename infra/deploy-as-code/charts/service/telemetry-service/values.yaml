@@ -7,8 +7,8 @@ labels:
 ingress:
   enabled: true
   contexts:
-    - "api/v2/webhook"
-    - "api/publish"
+    - "api/v1/telemetry"
+    - "api/v1/publish"
 # Init Containers Configs
 
 # Container Configs
@@ -46,7 +46,7 @@ env: |
         key: password
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
-    value: "https://staging.jalsoochak.in/keycloak"
+    value: "http://keycloak:80/keycloak"
   - name: SPRING_MAIL_USERNAME
     valueFrom:
       secretKeyRef:

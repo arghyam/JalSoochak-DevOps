@@ -4,10 +4,10 @@ labels:
   group: "core"
 
 
-# ingress:
-#   enabled: true
-#   zuul: true
-#   context: "api/v2/auth(/|$)(.*)"
+ingress:
+  enabled: true
+  # zuul: true
+  context: "api/v1/message"
 # # Init Containers Configs
 
 # Container Configs
@@ -24,7 +24,7 @@ replicas: "1"
 # Additional Container Envs
 env: |
   - name: NOTIFICATIONS_DRY_RUN
-    value: "true"
+    value: "false"
   - name: JAVA_OPTS
     value: -Xmx192m -Xms192m
   - name: SERVER_PORT
@@ -47,7 +47,7 @@ env: |
         key: password
         name: jalsoochak
   - name: KEYCLOAK_AUTH_SERVER_URL
-    value: "https://staging.jalsoochak.in/keycloak"
+    value: "http://keycloak:80/keycloak"
   - name: SPRING_MAIL_USERNAME
     valueFrom:
       secretKeyRef:
@@ -96,7 +96,7 @@ env: |
   - name: GLIFIC_NUDGE_FLOW_ID
     value: "37300"
   - name: GLIFIC_WELCOME_FLOW_ID
-    value: "3733453"
+    value: "37684"
   - name: MINIO_ENDPOINT
     valueFrom:
       secretKeyRef:
@@ -140,3 +140,5 @@ env: |
         name: glific
   - name: GLIFIC_LOGIN_OTP_TEMPLATE_ID
     value: "702101"
+  - name: APP_BASE_URL
+    value: "https://jalsoochak.beehyv.com"
