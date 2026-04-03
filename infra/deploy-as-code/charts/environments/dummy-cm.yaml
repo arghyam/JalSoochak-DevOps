@@ -2,7 +2,7 @@ apiVersion: v1
 data:
   config.js: |
     window.APP_CONFIG = {
-      API_BASE_URL: 'https://staging.jalsoochak.in',
+      API_BASE_URL: 'https://jalsoochak.beehyv.com',
     }
 kind: ConfigMap
 metadata:
