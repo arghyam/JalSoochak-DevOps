@@ -47,5 +47,5 @@ jobs:
       - name: Helm Deployment
         run: |
           IMAGE="${{ inputs.image_tag }}"
-          helmfile apply -f jalsoochak-helmfile.yaml.gotmpl --selector name=${{ inputs.service_name }} --set ${{ inputs.service_name }}.image.tag=$IMAGE
+          helmfile apply -f jalsoochak-helmfile.yaml --selector name=${{ inputs.service_name }} --set ${{ inputs.service_name }}.image.tag=$IMAGE
         working-directory: infra/deploy-as-code
