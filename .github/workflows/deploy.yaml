@@ -23,14 +23,14 @@ on:
 jobs:
   Helm-Deployment:
     name: Deployment for ${{ inputs.service_name }}
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64]
 
     steps:
       - name: Checkout DevOps Repo
         uses: actions/checkout@v4
         with:
           repository: arghyam/JalSoochak-Devops
-          ref: staging
+          ref: dev
           fetch-depth: 0
           
       - name: Set up Helm
@@ -43,13 +43,9 @@ jobs:
         with:
           helm-plugins: >
             https://github.com/databus23/helm-diff --verify=false
-      - name: Configure Kubeconfig
-        run: |
-          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
-          export KUBECONFIG=$PWD/kubeconfig
-          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV            
+            
       - name: Helm Deployment
         run: |
           IMAGE="${{ inputs.image_tag }}"
-          helmfile apply -f jalsoochak-helmfile.yaml --selector name=${{ inputs.service_name }} --set ${{ inputs.service_name }}.image.tag=$IMAGE
+          helmfile apply -f jalsoochak-helmfile.yaml.gotmpl --selector name=${{ inputs.service_name }} --set ${{ inputs.service_name }}.image.tag=$IMAGE
         working-directory: infra/deploy-as-code
