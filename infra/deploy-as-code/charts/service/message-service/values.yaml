@@ -94,9 +94,9 @@ env: |
   - name: GLIFIC_ESCALATION_TEMPLATE_ID
     value: "829817"
   - name: GLIFIC_NUDGE_FLOW_ID
-    value: "37300"
+    value: "38121"
   - name: GLIFIC_WELCOME_FLOW_ID
-    value: "37684"
+    value: "38125"
   - name: MINIO_ENDPOINT
     valueFrom:
       secretKeyRef:
