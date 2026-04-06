@@ -142,3 +142,26 @@ env: |
     value: "702101"
   - name: APP_BASE_URL
     value: "https://staging.jalsoochak.in"
+  - name: MAIL_PROVIDER
+    value: "sendgrid"
+  - name: MAIL_FROM_EMAIL
+    value: "info@jalsoochak.in"
+  - name: MAIL_FROM_NAME
+    value: "Jalsoochak"
+  - name: MAIL_LOGO_URL
+    value: "https://lh3.googleusercontent.com/d/1WUwmfNG_wyWF_G31MaWCtWIsZCxHy5g2"
+  - name: SENDGRID_API_KEY
+    valueFrom:
+      secretKeyRef:
+        key: SENDGRID_API_KEY
+        name: jalsoochak
+  - name: SENDGRID_TEMPLATE_PASSWORD_RESET
+    value: "d-9d83de3639254c18b86fa2834f4a5db1"
+  - name: SENDGRID_TEMPLATE_REINVITATION
+    value: "d-3710ff4d9d874cf1950c589c6f71d752"
+  - name: SENDGRID_TEMPLATE_DEFAULT_INVITATION
+    value: "d-7721978b67bf4f0083891657ed584447"
+  - name: SENDGRID_TEMPLATE_SUPER_USER_INVITATION
+    value: "d-6ff964820aae4e03866dd39f64976287"
+  - name: SENDGRID_TEMPLATE_STATE_ADMIN_INVITATION
+    value: "d-ec98926fa9ed4046b3bf9b85c7a1a7e3"
