@@ -1,0 +1,196 @@
+repositories:
+  - name: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+
+templates: 
+  default: &default
+    missingFileHandler: Warn
+values:
+  - ./charts/environments/jalsoochak-dev-secret.yaml
+  - ./charts/environments/jalsoochak-dev.yaml
+
+helmDefaults:
+  args:
+    - --values
+    - ./charts/environments/jalsoochak-dev.yaml
+
+releases:
+  - name: ingress-nginx
+    installed: true
+    chart: ./charts/service/ingress-nginx
+    version: 4.10.0
+    <<: *default
+    values:
+      - ./charts/service/ingress-nginx/values.yaml
+      - ./charts/service/ingress-nginx/values-domain.gotmpl
+
+
+  # Keycloak (Codecentric)
+  - name: keycloak
+    chart: bitnami/keycloak
+    version: 25.2.0
+    values:
+      - ./charts/service/keycloak/values.gotmpl
+
+
+  - name: flowvision
+    chart: ./charts/service/flowvision
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/flowvision/values.yaml
+      - ./charts/service/flowvision/values-domain.gotmpl
+
+  - name: cert-manager
+    chart: ./charts/service/cert-manager
+    installed: true
+    version: v1.13.3
+    disableValidation: true
+    values:
+      - ./charts/service/cert-manager/values.yaml
+
+  - name: servicediscovery
+    chart: ./charts/service/servicediscovery
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/servicediscovery/values.yaml
+
+  
+  - name: apigateway
+    chart: ./charts/service/apigateway
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/apigateway/values.yaml
+
+  - name: jalsoochak-frontend
+    chart: ./charts/service/jalsoochak-frontend
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/jalsoochak-frontend/values.yaml
+      - ./charts/service/jalsoochak-frontend/values-domain.gotmpl
+  
+  - name: anomaly-service
+    chart: ./charts/service/anomaly-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/anomaly-service/values.yaml
+      - ./charts/service/anomaly-service/values-domain.gotmpl
+
+  - name: scheme-service
+    chart: ./charts/service/scheme-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/scheme-service/values.yaml
+      - ./charts/service/scheme-service/values-domain.gotmpl
+
+  - name: telemetry-service
+    chart: ./charts/service/telemetry-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/telemetry-service/values.yaml
+      - ./charts/service/telemetry-service/values-domain.gotmpl
+
+  - name: tenant-service
+    chart: ./charts/service/tenant-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/tenant-service/values.yaml
+      - ./charts/service/tenant-service/values-domain.gotmpl
+
+  - name: user-service
+    chart: ./charts/service/user-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/user-service/values.yaml
+      - ./charts/service/user-service/values-domain.gotmpl
+
+  - name: message-service
+    chart: ./charts/service/message-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/message-service/values.yaml
+
+  - name: analytics-service
+    chart: ./charts/service/analytics-service
+    installed: true
+    version: 0.1.0
+    values:
+      - ./charts/service/analytics-service/values.yaml
+      - ./charts/service/analytics-service/values-domain.gotmpl
+ 
+  - name: minio
+    installed: true
+    chart: ./charts/service/minio
+    version: 13.3.1
+    <<: *default
+    values:
+      - ./charts/service/minio/values.yaml
+      - ./charts/service/minio/values-ingress.gotmpl
+
+  - name: redis
+    installed: true
+    chart: ./charts/service/redis
+    version: 7.2.4
+    <<: *default
+    values:
+      - ./charts/service/redis/values.yaml
+
+  - name: kafka-kraft
+    installed: true
+    chart: ./charts/service/kafka-kraft
+    version: 26.2.0
+    <<: *default
+    values:
+      - ./charts/service/kafka-kraft/values.yaml
+
+  - name: kube-prometheus-stack
+    installed: true
+    chart: prometheus-community/kube-prometheus-stack
+    version: 56.6.2
+    disableValidation: true
+    values:
+      - ./charts/service/monitoring/prometheus.yaml
+
+  - name: grafana
+    installed: true
+    chart: grafana/grafana
+    version: 7.3.0
+    values:
+      - ./charts/service/monitoring/grafana.yaml
+      - ./charts/service/monitoring/values-domain.gotmpl
+
+  - name: loki
+    installed: true
+    chart: grafana/loki
+    version: 6.6.2
+    values:
+      - ./charts/service/monitoring/loki-values.yaml
+
+  - name: promtail
+    installed: true
+    chart: grafana/promtail
+    version: 6.15.5
+    values:
+      - ./charts/service/monitoring/promtail-values.yaml
+
+  - name: kafka-ui
+    installed: true
+    chart: ./charts/service/kafka-ui
+    version: 0.1.0
+    values:
+      - ./charts/service/kafka-ui/values.yaml
