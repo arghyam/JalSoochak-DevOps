@@ -144,8 +144,6 @@ env: |
     value: "https://jalsoochak.beehyv.com"
   - name: MAIL_PROVIDER
     value: "sendgrid"
-  - name: MAIL_FROM_EMAIL
-    value: "info@jalsoochak.in"
   - name: MAIL_FROM_NAME
     value: "Jalsoochak"
   - name: MAIL_LOGO_URL
