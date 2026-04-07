@@ -1,5 +1,6 @@
 global:
   domain: "jalsoochak.beehyv.com"
+  namespace: "default"
 root-ingress:
   cert-issuer: "letsencrypt-prod"
 
