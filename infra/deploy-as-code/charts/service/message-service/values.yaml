@@ -96,7 +96,7 @@ env: |
   - name: GLIFIC_NUDGE_FLOW_ID
     value: "37300"
   - name: GLIFIC_WELCOME_FLOW_ID
-    value: "37684"
+    value: ""
   - name: MINIO_ENDPOINT
     valueFrom:
       secretKeyRef:
