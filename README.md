@@ -38,10 +38,10 @@ cd infra/deploy-as-code
 
 #### 1. Deploy Postgres & Minio
 ```bash
-helmfile apply -f prostgres-helmfile.yaml
+helmfile apply -f prostgres-helmfile.yaml.gotmpl
 ```
 ```bash
-helmfile apply -f jalsoochak-helmfile.yaml
+helmfile apply -f jalsoochak-helmfile.yaml.gotmpl --selector name=minio
 ```
 Note: Postgres and minio can be deployment outside cluster.
 
@@ -50,9 +50,6 @@ Before running `helmfile apply`, Update minio and postgres credential in secrets
 create the necessary Kubernetes secrets and configmaps:
 
 ```bash
-# Apply ConfigMap
-kubectl apply -f charts/environments/dev-cm.yaml
-
 # Decrypt and apply Secrets
 sops -d charts/environments/dev-secret.yaml | kubectl apply -f -
 ```
