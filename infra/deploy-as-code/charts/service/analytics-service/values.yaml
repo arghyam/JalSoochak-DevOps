@@ -87,7 +87,7 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
-    value: "https://jalsoochak.beehyv.com/keycloak/realms/jalsoochak-realm"
+    value: "https://staging.jalsoochak.in/keycloak/realms/jalsoochak-realm"
   - name: SPRING_DATA_REDIS_PORT
     value: "6379"
   - name: SPRING_DATA_REDIS_HOST
