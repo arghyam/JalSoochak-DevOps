@@ -113,7 +113,7 @@ env: |
   - name: OTP_LENGTH
     value: "6"
   - name: OTP_DELIVERY_CHANNEL
-    value: "SMS"
+    value: "WHATSAPP"
   - name: PII_ENCRYPTION_KEY
     valueFrom:
       secretKeyRef:
