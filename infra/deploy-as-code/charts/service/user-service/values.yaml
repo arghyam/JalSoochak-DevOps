@@ -115,7 +115,7 @@ env: |
   - name: OTP_DELIVERY_CHANNEL
     value: "SMS"
   - name: OTP_CHEAT_ENABLED
-    value: "false"
+    value: "true"
   - name: OTP_CHEAT_VALUE
     value: "123456" 
   - name: PII_ENCRYPTION_KEY
