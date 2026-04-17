@@ -114,6 +114,10 @@ env: |
     value: "6"
   - name: OTP_DELIVERY_CHANNEL
     value: "WHATSAPP"
+  - name: OTP_CHEAT_ENABLED
+    value: "true"
+  - name: OTP_CHEAT_VALUE
+    value: "123456" 
   - name: PII_ENCRYPTION_KEY
     valueFrom:
       secretKeyRef:
