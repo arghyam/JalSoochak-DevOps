@@ -6,4 +6,11 @@ data:
   config.js: |
     window.APP_CONFIG = {
       API_BASE_URL: 'https://{{ .Values.global.domain }}',
+      DEFAULT_AVERAGE_MEMBERS_PER_HOUSEHOLD: "5",
+      DEFAULT_WATER_NORM_LITERS_PER_PERSON_PER_DAY: "55",
+      MAP_LEGEND_THRESHOLD_GTE_90: "80",
+      MAP_LEGEND_THRESHOLD_GTE_70: "70",
+      MAP_LEGEND_THRESHOLD_GTE_50: "50",
+      MAP_LEGEND_THRESHOLD_GTE_30: "30",
+      MAP_LEGEND_THRESHOLD_GTE_0: "0",
     }
