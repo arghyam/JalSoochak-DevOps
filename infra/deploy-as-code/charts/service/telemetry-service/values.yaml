@@ -123,3 +123,15 @@ env: |
       secretKeyRef:
         key: pii-hmac-key
         name: jalsoochak
+  - name: GLIFIC_SYNC_USER_PHONE
+    valueFrom:
+      secretKeyRef:
+        key: glific-username
+        name: glific
+  - name: GLIFIC_SYNC_USER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: glific-password
+        name: glific
+  - name: GLIFIC_READINGS_RESUME_FLOW_ID
+    value: "37172"
