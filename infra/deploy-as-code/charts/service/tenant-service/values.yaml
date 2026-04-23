@@ -134,3 +134,7 @@ env: |
         name: jalsoochak
   - name: SINGLE_TENANT_MODE
     value: "false"
+  - name: GLIFIC_RESUME_BASE_URL
+    value: "https://api.arghyam.glific.com"
+  - name: GLIFIC_RESUME_ENABLED
+    value: "true"
