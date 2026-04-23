@@ -132,3 +132,5 @@ env: |
       secretKeyRef:
         key: pii-hmac-key
         name: jalsoochak
+  - name: SINGLE_TENANT_MODE
+    value: "false"
