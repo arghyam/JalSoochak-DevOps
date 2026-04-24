@@ -163,3 +163,13 @@ env: |
     value: "d-6ff964820aae4e03866dd39f64976287"
   - name: SENDGRID_TEMPLATE_STATE_ADMIN_INVITATION
     value: "d-ec98926fa9ed4046b3bf9b85c7a1a7e3"
+  - name: SMSCOUNTRY_AUTH_KEY
+    valueFrom:
+      secretKeyRef:
+        key: SMSCOUNTRY_AUTH_KEY
+        name: jalsoochak
+  - name: SMSCOUNTRY_AUTH_TOKEN
+    valueFrom:
+      secretKeyRef:
+        key: SMSCOUNTRY_AUTH_TOKEN
+        name: jalsoochak

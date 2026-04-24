@@ -92,3 +92,19 @@ env: |
     value: "6379"
   - name: SPRING_DATA_REDIS_HOST
     value: "redis"
+  # --- Hikari Connection Pool (tuned for concurrent dashboards) ---
+  - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+    value: "30"
+  - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+    value: "10"
+  - name: SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT
+    value: "5000"
+  - name: SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT
+    value: "300000"
+  - name: SPRING_DATASOURCE_HIKARI_LEAK_DETECTION_THRESHOLD
+    value: "30000"
+  # --- Redis Timeouts (prevents hung connections) ---
+  - name: SPRING_DATA_REDIS_TIMEOUT
+    value: "2000"
+  - name: SPRING_DATA_REDIS_CONNECT_TIMEOUT
+    value: "1000"

@@ -125,3 +125,40 @@ env: |
         name: jalsoochak
   - name: FLOWVISION_URL
     value: https://staging.jalsoochak.in/flowvision/v1/extract-reading
+  # --- Hikari Connection Pool (tuned for 50+ VU load) ---
+  - name: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+    value: "25"
+  - name: SPRING_DATASOURCE_HIKARI_MINIMUM_IDLE
+    value: "5"
+  - name: SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT
+    value: "5000"
+  - name: SPRING_DATASOURCE_HIKARI_LEAK_DETECTION_THRESHOLD
+    value: "30000"
+  # --- Tomcat Thread Pool ---
+  - name: SERVER_TOMCAT_THREADS_MAX
+    value: "200"
+  - name: SERVER_TOMCAT_THREADS_MIN_SPARE
+    value: "20"
+  - name: SERVER_TOMCAT_ACCEPT_COUNT
+    value: "100"
+  # --- Kafka Producer (tuned for reliability under load) ---
+  - name: SPRING_KAFKA_PRODUCER_PROPERTIES_MAX_BLOCK_MS
+    value: "10000"
+  - name: SPRING_KAFKA_PRODUCER_PROPERTIES_REQUEST_TIMEOUT_MS
+    value: "30000"
+  - name: SPRING_KAFKA_PRODUCER_PROPERTIES_RETRIES
+    value: "3"
+  - name: SPRING_KAFKA_PRODUCER_PROPERTIES_ACKS
+    value: "1"
+  - name: GLIFIC_SYNC_USER_PHONE
+    valueFrom:
+      secretKeyRef:
+        key: glific-username
+        name: glific
+  - name: GLIFIC_SYNC_USER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        key: glific-password
+        name: glific
+  - name: GLIFIC_READINGS_RESUME_FLOW_ID
+    value: "37172"
