@@ -173,3 +173,13 @@ env: |
       secretKeyRef:
         key: SMSCOUNTRY_AUTH_TOKEN
         name: jalsoochak
+  - name: PII_ENCRYPTION_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-encryption-key
+        name: jalsoochak
+  - name: PII_HMAC_KEY
+    valueFrom:
+      secretKeyRef:
+        key: pii-hmac-key
+        name: jalsoochak
