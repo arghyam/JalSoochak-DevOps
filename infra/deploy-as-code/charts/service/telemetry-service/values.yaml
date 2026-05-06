@@ -133,5 +133,5 @@ env: |
       secretKeyRef:
         key: glific-password
         name: glific
-  - name: GLIFIC_READINGS_RESUME_FLOW_ID
+  - name: GLIFIC_RESUME_FLOW_ID
     value: "38889"
