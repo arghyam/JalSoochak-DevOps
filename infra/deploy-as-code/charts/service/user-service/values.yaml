@@ -135,3 +135,36 @@ env: |
         name: jalsoochak
   - name: SINGLE_TENANT_MODE
     value: "false"
+  - name: STORAGE_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: STORAGE_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: accessKey
+        name: minio
+  - name: STORAGE_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: secretKey
+        name: minio
+  - name: STORAGE_REGION
+    valueFrom:
+      secretKeyRef:
+        key: region
+        name: minio
+  - name: STORAGE_BUCKET
+    value: "tenant-assets"
+  - name: STORAGE_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: STORAGE_ENABLED
+    value: 'true'
+  - name: STORAGE_REPORTS_BUCKET
+    value: "jalsoochak-reports"
+  - name: STORAGE_PRESIGNED_TTL_SECONDS
+    value: "3600"
