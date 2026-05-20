@@ -90,3 +90,28 @@ env: |
     value: "http://servicediscovery:8761/eureka"
   - name: SINGLE_TENANT_MODE
     value: "false
+  - name: MINIO_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: minio
+  - name: MINIO_BUCKET
+    valueFrom:
+      secretKeyRef:
+        key: bucket
+        name: minio
+  - name: MINIO_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: accessKey
+        name: minio
+  - name: MINIO_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: secretKey
+        name: minio
+  - name: MINIO_REGION
+    valueFrom:
+      secretKeyRef:
+        key: region
+        name: minio
