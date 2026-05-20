@@ -155,6 +155,11 @@ env: |
       secretKeyRef:
         key: region
         name: minio
+  - name: STORAGE_PRESIGNED_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: presigned-url
+        name: minio
   - name: STORAGE_BUCKET
     value: "tenant-assets"
   - name: STORAGE_BASE_URL
