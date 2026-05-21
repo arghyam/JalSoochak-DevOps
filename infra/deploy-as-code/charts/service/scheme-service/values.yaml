@@ -115,3 +115,8 @@ env: |
       secretKeyRef:
         key: region
         name: minio
+  - name: STORAGE_PRESIGNED_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: presigned-url
+        name: minio
