@@ -165,6 +165,10 @@ env: |
     value: "d-6ff964820aae4e03866dd39f64976287"
   - name: SENDGRID_TEMPLATE_STATE_ADMIN_INVITATION
     value: "d-ec98926fa9ed4046b3bf9b85c7a1a7e3"
+  - name: SMSCOUNTRY_DLT_TEMPLATE_ID
+    value: "1707177995274127403"
+  - name: SMSCOUNTRY_DLT_HEADER_ID
+    value: "1705177988665799637" 
   - name: SMSCOUNTRY_AUTH_KEY
     valueFrom:
       secretKeyRef:
