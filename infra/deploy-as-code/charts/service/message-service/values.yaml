@@ -23,8 +23,10 @@ replicas: "1"
 
 # Additional Container Envs
 env: |
-  - name: NOTIFICATIONS_DRY_RUN
-    value: "false"
+  - name: NOTIFICATIONS_WHATSAPP_DRY_RUN
+    value: 'false'
+  - name: NOTIFICATIONS_SMS_DRY_RUN
+    value: 'true'
   - name: JAVA_OPTS
     value: -Xmx192m -Xms192m
   - name: SERVER_PORT
