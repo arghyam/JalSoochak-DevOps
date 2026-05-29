@@ -169,6 +169,8 @@ env: |
     value: "1707177995274127403"
   - name: SMSCOUNTRY_DLT_HEADER_ID
     value: "1705177988665799637" 
+  - name: SMSCOUNTRY_SENDER_ID
+    value: "JALSHK"
   - name: SMSCOUNTRY_AUTH_KEY
     valueFrom:
       secretKeyRef:
