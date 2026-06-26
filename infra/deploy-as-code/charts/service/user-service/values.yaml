@@ -163,7 +163,7 @@ env: |
   - name: STORAGE_ENABLED
     value: 'true'
   - name: STORAGE_BUCKET
-    value: "user-service-assets"
+    value: "tenant-assest"
   - name: STORAGE_REPORTS_BUCKET
     value: "jalsoochak-reports"
   - name: STORAGE_PRESIGNED_TTL_SECONDS
