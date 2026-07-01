@@ -27,6 +27,10 @@ env: |
     value: 'false'
   - name: NOTIFICATIONS_SMS_DRY_RUN
     value: 'true'
+  - name: NOTIFICATIONS_ESCALATION_DRY_RUN
+    value: "true"
+  - name: NOTIFICATIONS_NUDGE_DRY_RUN
+    value: "true"
   - name: JAVA_OPTS
     value: -Xmx192m -Xms192m
   - name: SERVER_PORT
