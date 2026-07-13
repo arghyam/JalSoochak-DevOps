@@ -24,7 +24,7 @@ replicas: "1"
 # Additional Container Envs
 env: |
   - name: NOTIFICATIONS_WHATSAPP_DRY_RUN
-    value: 'false'
+    value: 'true'
   - name: NOTIFICATIONS_SMS_DRY_RUN
     value: 'true'
   - name: NOTIFICATIONS_ESCALATION_DRY_RUN
