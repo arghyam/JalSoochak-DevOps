@@ -7,6 +7,10 @@ labels:
 ingress:
   enabled: true
   # zuul: true
+  annotations:
+    nginx.ingress.kubernetes.io/limit-rps: "5"
+    nginx.ingress.kubernetes.io/limit-rpm: "30"
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: "2"
   contexts:
     - "api/v1/auth"
     - "api/v1/users"
