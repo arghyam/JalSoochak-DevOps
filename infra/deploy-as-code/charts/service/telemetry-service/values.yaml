@@ -134,4 +134,4 @@ env: |
         key: glific-password
         name: glific
   - name: GLIFIC_RESUME_FLOW_ID
-    value: "40368"
+    value: "39776"
