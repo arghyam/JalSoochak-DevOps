@@ -99,6 +99,10 @@ env: |
     value: "7986"
   - name: GLIFIC_ESCALATION_TEMPLATE_ID
     value: "829817"
+  - name: GLIFIC_DAILY_REPORT_SDO_TEMPLATE_ID
+    value: "876196"
+  - name: GLIFIC_DAILY_REPORT_SO_TEMPLATE_ID
+    value: "876193"
   - name: GLIFIC_NUDGE_FLOW_ID
     value: "37300"
   - name: GLIFIC_WELCOME_FLOW_ID
