@@ -138,3 +138,7 @@ env: |
     value: "https://api.arghyam.glific.com"
   - name: GLIFIC_RESUME_ENABLED
     value: "true"
+  - name: DAILY_REPORT_SCHEDULE_HOUR
+    value: "17"
+  - name: DAILY_REPORT_SCHEDULE_MINUTE
+    value: "00"
