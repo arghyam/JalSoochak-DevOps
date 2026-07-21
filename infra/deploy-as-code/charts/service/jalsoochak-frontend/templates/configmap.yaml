@@ -21,4 +21,6 @@ data:
         DAYS: 1,
         ALLOWED_DAYS: [1, 7, 30],
       },
+      CAPTCHA_ENABLED: true,
+      RECAPTCHA_SITE_KEY: '6LdNzFYtAAAAAK43qwhH6tUKYeTvZo90MwLymAA5',
     }
