@@ -133,7 +133,7 @@ env: |
         key: pii-hmac-key
         name: jalsoochak
   - name: SINGLE_TENANT_MODE
-    value: "false"
+    value: "true"
   - name: GLIFIC_RESUME_BASE_URL
     value: "https://api.arghyam.glific.com"
   - name: GLIFIC_RESUME_ENABLED

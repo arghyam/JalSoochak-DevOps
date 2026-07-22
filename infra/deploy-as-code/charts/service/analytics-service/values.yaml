@@ -92,3 +92,5 @@ env: |
     value: "6379"
   - name: SPRING_DATA_REDIS_HOST
     value: "redis"
+  - name: SINGLE_TENANT_MODE
+    value: "true"
