@@ -181,3 +181,10 @@ env: |
     value: "jalsoochak-reports"
   - name: STORAGE_PRESIGNED_TTL_SECONDS
     value: "3600"
+  - name: CAPTCHA_ENABLED
+    value: 'true'
+  - name: CAPTCHA_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: captcha-secret-key
+        name: jalsoochak
