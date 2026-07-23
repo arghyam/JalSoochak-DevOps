@@ -10,17 +10,14 @@ ingress:
   context: ""
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: >
-      more_set_headers "Content-Security-Policy:
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval';
-      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-      font-src 'self' https://fonts.gstatic.com data:;
-      img-src 'self' data: blob:;
-      object-src 'none';
-      base-uri 'self';
-      frame-ancestors 'none';
-      upgrade-insecure-requests;
-      block-all-mixed-content;";
+      more_set_headers "Content-Security-Policy: default-src 'self'; script-src
+      'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com
+      https://www.gstatic.com https://www.recaptcha.net; style-src 'self'
+      'unsafe-inline' https://fonts.googleapis.com; font-src 'self'
+      https://fonts.gstatic.com data:; img-src 'self' data: blob: https:;
+      connect-src 'self' https: wss:; frame-src 'self' https://www.google.com
+      https://www.recaptcha.net; object-src 'none'; base-uri 'self';
+      frame-ancestors 'none'; upgrade-insecure-requests;";
 # Init Containers Configs
 
 # Container Configs
