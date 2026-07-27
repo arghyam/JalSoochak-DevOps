@@ -94,3 +94,5 @@ env: |
     value: "redis"
   - name: SINGLE_TENANT_MODE
     value: "true"
+  - name: ANALYTICS_DASHBOARD_CACHE_CURRENT_DAY_TTL_SECONDS
+    value: "3600"
