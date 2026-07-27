@@ -102,3 +102,5 @@ env: |
     value: "2000"
   - name: SPRING_DATA_REDIS_CONNECT_TIMEOUT
     value: "1000"
+  - name: ANALYTICS_DASHBOARD_CACHE_CURRENT_DAY_TTL_SECONDS
+    value: "3600"
