@@ -135,3 +135,6 @@ env: |
         name: glific
   - name: GLIFIC_RESUME_FLOW_ID
     value: "39776"
+  - name: FLOWVISION_ROLLOVER_RESOLUTION_ENABLED
+    value: "true"
+  
