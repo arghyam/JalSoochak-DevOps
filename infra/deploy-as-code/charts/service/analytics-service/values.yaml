@@ -92,3 +92,5 @@ env: |
     value: "6379"
   - name: SPRING_DATA_REDIS_HOST
     value: "redis"
+  - name: ANALYTICS_DASHBOARD_CACHE_CURRENT_DAY_TTL_SECONDS
+    value: "1800"
