@@ -199,3 +199,11 @@ env: |
       secretKeyRef:
         key: pii-hmac-key
         name: jalsoochak
+  - name: NOTIFICATIONS_DAILY_REPORT_DELIVERY_MODE
+    value: "LINK"
+  - name: GLIFIC_DAILY_REPORT_SO_LINK_TEMPLATE_ID
+    value: "880556"
+  - name: GLIFIC_DAILY_REPORT_SDO_LINK_TEMPLATE_ID
+    value: "880556" 
+  - name: DAILY_REPORT_LINK_BUTTON_BASE_URL
+    value: "https://jalsoochak.in/minio/"
