@@ -132,7 +132,7 @@ env: |
   - name: MINIO_BASE_URL
     valueFrom:
       secretKeyRef:
-        key: endpoint
+        key: presigned-url
         name: minio
   - name: GLIFIC_API_URL
     value: "https://api.arghyam.glific.com/api"
