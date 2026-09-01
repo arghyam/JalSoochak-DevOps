@@ -93,7 +93,7 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: SINGLE_TENANT_MODE
-    value: "true"
+    value: "false"
   - name: MINIO_ENDPOINT
     valueFrom:
       secretKeyRef:

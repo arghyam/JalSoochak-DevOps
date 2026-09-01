@@ -138,7 +138,7 @@ env: |
         key: staff-managed-password-key
         name: jalsoochak
   - name: SINGLE_TENANT_MODE
-    value: "true"
+    value: "false"
   - name: STORAGE_ENDPOINT
     valueFrom:
       secretKeyRef:

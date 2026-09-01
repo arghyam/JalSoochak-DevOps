@@ -93,6 +93,6 @@ env: |
   - name: SPRING_DATA_REDIS_HOST
     value: "redis"
   - name: SINGLE_TENANT_MODE
-    value: "true"
+    value: "false"
   - name: ANALYTICS_DASHBOARD_CACHE_CURRENT_DAY_TTL_SECONDS
     value: "3600"

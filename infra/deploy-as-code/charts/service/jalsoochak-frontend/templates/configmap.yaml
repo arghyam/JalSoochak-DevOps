@@ -23,5 +23,5 @@ data:
       },
       CAPTCHA_ENABLED: true,
       RECAPTCHA_SITE_KEY: '6LcWUJktAAAAAIjNounA2IpSazXfRx5PR6RESwwh',
-      SINGLE_TENANT_MODE: "true",
+      SINGLE_TENANT_MODE: "false",
     }
