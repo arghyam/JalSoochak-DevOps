@@ -137,4 +137,8 @@ env: |
     value: "39776"
   - name: FLOWVISION_ROLLOVER_RESOLUTION_ENABLED
     value: "true"
-  
+  - name: TELEMETRY_WEBHOOK_AUTH_TOKEN_HASHES
+    valueFrom:
+      secretKeyRef:
+        key: telemetry-webhook-token-hash
+        name: jalsoochak
