@@ -19,6 +19,7 @@ ingress:
     - "message"
     - "scheme"
     - "analytics"
+    - "api/v1"
 # Init Containers Configs
 
 # Container Configs
@@ -28,10 +29,10 @@ image:
   tag: "gateway-test-1"
 replicas: "1"
 # tracing-enabled: true
-# healthChecks:
-#   enabled: true
-#   livenessProbePath: "/management-service/health"
-#   readinessProbePath: "/management-service/health"
+healthChecks:
+  enabled: true
+  livenessProbePath: "/actuator/health"
+  readinessProbePath: "/actuator/health"
 
 # Additional Container Envs
 env: |
@@ -44,7 +45,7 @@ env: |
   - name: EUREKA_URL
     value: "http://servicediscovery:8761/eureka/"
   - name: EUREKA_ENABLED
-    value: "true"
+    value: "false"
   - name: TENANT_SERVICE_URI
     value: "http://tenant-service:8080"
   - name: USER_SERVICE_URI
