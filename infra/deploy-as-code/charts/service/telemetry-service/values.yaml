@@ -6,6 +6,7 @@ labels:
 
 ingress:
   enabled: true
+  zuul: true
   contexts:
     - "api/v1/telemetry"
     - "api/v1/publish"
@@ -169,3 +170,9 @@ env: |
       secretKeyRef:
         key: telemetry-webhook-token-hash
         name: jalsoochak
+  - name: TELEMETRY_SUPPLY_PLAUSIBILITY_MODE
+    value: "ENFORCE"
+  - name: HIGH_QUANTITY_THRESHOLD_LIMIT_PER_PERSON
+    value: "250"
+  - name: DEFAULT_MEMBERS_PER_HOUSEHOLD
+    value: "5"

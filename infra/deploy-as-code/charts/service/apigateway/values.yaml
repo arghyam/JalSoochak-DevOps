@@ -37,14 +37,18 @@ replicas: "1"
 env: |
   - name: SERVER_PORT
     value: "8080"
-  - name: SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI
-    value: "http://keycloak:80/keycloak/realms/jalsoochak-realm"
+  - name: RATE_LIMIT_ENABLED
+    value: "true"
+  - name: SPRING_DATA_REDIS_HOST
+    value: "redis"
+  - name: SPRING_DATA_REDIS_PORT
+    value: "6379"
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: EUREKA_URL
     value: "http://servicediscovery:8761/eureka/"
   - name: EUREKA_ENABLED
-    value: "true"
+    value: "false"
   - name: TENANT_SERVICE_URI
     value: "http://tenant-service:8080"
   - name: USER_SERVICE_URI

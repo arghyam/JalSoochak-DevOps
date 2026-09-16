@@ -6,7 +6,7 @@ labels:
 
 ingress:
   enabled: true
-  # zuul: true
+  zuul: true
   annotations:
     nginx.ingress.kubernetes.io/limit-rps: "5"
     nginx.ingress.kubernetes.io/limit-rpm: "30"
@@ -118,6 +118,10 @@ env: |
     value: "3"
   - name: OTP_COOLDOWN_SECONDS
     value: "60"
+  - name: PUBLIC_API_GUARD_CLIENT_IP_HEADER
+    value: "X-Forwarded-For"
+  - name: PUBLIC_API_GUARD_BLOCKING
+    value: "false"
   - name: OTP_LENGTH
     value: "6"
   - name: OTP_DELIVERY_CHANNEL
