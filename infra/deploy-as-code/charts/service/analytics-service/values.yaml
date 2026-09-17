@@ -97,3 +97,9 @@ env: |
     value: "false"
   - name: ANALYTICS_DASHBOARD_CACHE_CURRENT_DAY_TTL_SECONDS
     value: "3600"
+  - name: WEEKLY_REPORT_LOW_LPCD_THRESHOLD
+    value: "15"
+  - name: WEEKLY_REPORT_SO_MIN_SUPPLY_DAYS
+    value: "1"
+  - name: WEEKLY_REPORT_SDO_MIN_SUPPLY_DAYS
+    value: "4"
