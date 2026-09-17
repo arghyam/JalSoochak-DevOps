@@ -25,6 +25,11 @@ ingress:
       more_set_headers "X-XSS-Protection: 1; mode=block";
       more_set_headers "Referrer-Policy: strict-origin-when-cross-origin";
       more_set_headers "Strict-Transport-Security: max-age=31536000; includeSubDomains" always;
+      more_set_headers "Access-Control-Allow-Origin: https://staging.jalsoochak.in";
+      more_set_headers "Access-Control-Allow-Credentials: true";
+      more_set_headers "Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS";
+      more_set_headers "Access-Control-Allow-Headers: Authorization, Content-Type, X-Requested-With";
+      more_set_headers "Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com https://www.gstatic.com https://www.recaptcha.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https: wss:; frame-src 'self' https://www.google.com https://www.recaptcha.net; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests;";
   waf: 
     enabled: true
     annotations:
