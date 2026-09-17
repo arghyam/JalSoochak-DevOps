@@ -142,3 +142,9 @@ env: |
     value: "17"
   - name: DAILY_REPORT_SCHEDULE_MINUTE
     value: "00"
+  - name: WEEKLY_REPORT_SCHEDULE_DAY_OF_WEEK
+    value: "1"
+  - name: WEEKLY_REPORT_SCHEDULE_HOUR
+    value: "09"
+  - name: WEEKLY_REPORT_SCHEDULE_MINUTE
+    value: "00"
