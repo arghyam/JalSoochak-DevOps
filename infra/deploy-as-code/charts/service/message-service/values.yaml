@@ -212,6 +212,6 @@ env: |
   - name: DAILY_REPORT_LINK_BUTTON_BASE_URL
     value: "https://jalsoochak.in/minio/"
   - name: GLIFIC_WEEKLY_REPORT_SO_LINK_TEMPLATE_ID
-    value: "880556"
+    value: "882699"
   - name: GLIFIC_WEEKLY_REPORT_SDO_LINK_TEMPLATE_ID
-    value: "880556"
+    value: "882699"
