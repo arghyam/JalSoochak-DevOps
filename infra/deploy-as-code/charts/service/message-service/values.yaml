@@ -31,6 +31,10 @@ env: |
     value: "true"
   - name: NOTIFICATIONS_NUDGE_DRY_RUN
     value: "true"
+  - name: NOTIFICATIONS_WEEKLY_REPORT_DRY_RUN
+    value: "true"
+  - name: NOTIFICATIONS_DAILY_REPORT_DRY_RUN
+    value: "true"
   - name: JAVA_OPTS
     value: -Xmx192m -Xms192m
   - name: SERVER_PORT
@@ -207,3 +211,7 @@ env: |
     value: "880556" 
   - name: DAILY_REPORT_LINK_BUTTON_BASE_URL
     value: "https://jalsoochak.in/minio/"
+  - name: GLIFIC_WEEKLY_REPORT_SO_LINK_TEMPLATE_ID
+    value: "880556"
+  - name: GLIFIC_WEEKLY_REPORT_SDO_LINK_TEMPLATE_ID
+    value: "880556"
