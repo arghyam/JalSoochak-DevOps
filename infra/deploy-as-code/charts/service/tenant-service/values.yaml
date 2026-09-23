@@ -148,3 +148,10 @@ env: |
     value: "09"
   - name: WEEKLY_REPORT_SCHEDULE_MINUTE
     value: "00"
+  - name: MESSAGING_SECRET_ACTIVE_MASTER_KEY_ID
+    value: v1
+  - name: MESSAGING_SECRET_MASTER_KEY_V1
+    valueFrom:
+      secretKeyRef:
+        key: message-master-key-v1
+        name: jalsoochak
