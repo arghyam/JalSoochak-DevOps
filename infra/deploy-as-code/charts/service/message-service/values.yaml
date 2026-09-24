@@ -133,7 +133,7 @@ env: |
         name: minio
   - name: STORAGE_BUCKET
     value: "escalation-reports"
-  - name: STORAGE_BASE_URL
+  - name: STORAGE_PUBLIC_BASE_URL
     valueFrom:
       secretKeyRef:
         key: presigned-url

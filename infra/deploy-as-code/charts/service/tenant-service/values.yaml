@@ -115,7 +115,7 @@ env: |
         name: minio
   - name: STORAGE_BUCKET
     value: "tenant-assets"
-  - name: STORAGE_BASE_URL
+  - name: STORAGE_PUBLIC_BASE_URL
     valueFrom:
       secretKeyRef:
         key: endpoint
