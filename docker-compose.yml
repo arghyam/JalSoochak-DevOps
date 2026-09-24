@@ -210,20 +210,20 @@ services:
     container_name: jalsoochak_message_service
     environment:
       <<: *common-spring-env
-      GLIFIC_NUDGE_TEMPLATE_ID: "7986"
-      GLIFIC_ESCALATION_TEMPLATE_ID: "829817"
-      GLIFIC_NUDGE_FLOW_ID: "37300"
-      GLIFIC_WELCOME_FLOW_ID: "3733453"
+      WHATSAPP_NUDGE_TEMPLATE_ID: "7986"
+      WHATSAPP_ESCALATION_TEMPLATE_ID: "829817"
+      WHATSAPP_NUDGE_FLOW_ID: "37300"
+      WHATSAPP_WELCOME_FLOW_ID: "3733453"
       MINIO_ENDPOINT: "http://minio:9000"
       MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-admin}
       MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-password}
       MINIO_REGION: "us-east-1"
       MINIO_BUCKET: "escalation-reports"
       MINIO_BASE_URL: "http://minio:9000"
-      GLIFIC_API_URL: "https://api.arghyam.glific.com/api"
-      GLIFIC_AUTH_URL: "https://api.arghyam.glific.com/api/v1/session"
-      GLIFIC_USERNAME: ${GLIFIC_USERNAME}
-      GLIFIC_PASSWORD: ${GLIFIC_PASSWORD}
+      WHATSAPP_API_URL: "https://api.arghyam.glific.com/api"
+      WHATSAPP_AUTH_URL: "https://api.arghyam.glific.com/api/v1/session"
+      WHATSAPP_USERNAME: ${WHATSAPP_USERNAME}
+      WHATSAPP_PASSWORD: ${WHATSAPP_PASSWORD}
     depends_on:
       - postgres
       - kafka

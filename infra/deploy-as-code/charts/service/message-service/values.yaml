@@ -99,60 +99,60 @@ env: |
         name: jalsoochak
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
-  - name: GLIFIC_NUDGE_TEMPLATE_ID
+  - name: WHATSAPP_NUDGE_TEMPLATE_ID
     value: "7986"
-  - name: GLIFIC_ESCALATION_TEMPLATE_ID
+  - name: WHATSAPP_ESCALATION_TEMPLATE_ID
     value: "829817"
-  - name: GLIFIC_DAILY_REPORT_SDO_TEMPLATE_ID
+  - name: WHATSAPP_DAILY_REPORT_SDO_TEMPLATE_ID
     value: "876196"
-  - name: GLIFIC_DAILY_REPORT_SO_TEMPLATE_ID
+  - name: WHATSAPP_DAILY_REPORT_SO_TEMPLATE_ID
     value: "876193"
-  - name: GLIFIC_NUDGE_FLOW_ID
+  - name: WHATSAPP_NUDGE_FLOW_ID
     value: "37300"
-  - name: GLIFIC_WELCOME_FLOW_ID
+  - name: WHATSAPP_WELCOME_FLOW_ID
     value: "38949"
-  - name: MINIO_ENDPOINT
+  - name: STORAGE_ENDPOINT
     valueFrom:
       secretKeyRef:
         key: endpoint
         name: minio
-  - name: MINIO_ACCESS_KEY
+  - name: STORAGE_ACCESS_KEY
     valueFrom:
       secretKeyRef:
         key: accessKey
         name: minio
-  - name: MINIO_SECRET_KEY
+  - name: STORAGE_SECRET_KEY
     valueFrom:
       secretKeyRef:
         key: secretKey
         name: minio
-  - name: MINIO_REGION
+  - name: STORAGE_REGION
     valueFrom:
       secretKeyRef:
         key: region
         name: minio
-  - name: MINIO_BUCKET
+  - name: STORAGE_BUCKET
     value: "escalation-reports"
-  - name: MINIO_BASE_URL
+  - name: STORAGE_BASE_URL
     valueFrom:
       secretKeyRef:
         key: presigned-url
         name: minio
-  - name: GLIFIC_API_URL
+  - name: WHATSAPP_API_URL
     value: "https://api.arghyam.glific.com/api"
-  - name: GLIFIC_AUTH_URL
+  - name: WHATSAPP_AUTH_URL
     value: "https://api.arghyam.glific.com/api/v1/session"
-  - name: GLIFIC_USERNAME
+  - name: WHATSAPP_USERNAME
     valueFrom:
       secretKeyRef:
         key: glific-username
         name: glific
-  - name: GLIFIC_PASSWORD
+  - name: WHATSAPP_PASSWORD
     valueFrom:
       secretKeyRef:
         key: glific-password
         name: glific
-  - name: GLIFIC_LOGIN_OTP_TEMPLATE_ID
+  - name: WHATSAPP_LOGIN_OTP_TEMPLATE_ID
     value: "702101"
   - name: APP_BASE_URL
     value: "https://jalsoochak.beehyv.com"
@@ -205,15 +205,15 @@ env: |
         name: jalsoochak
   - name: NOTIFICATIONS_DAILY_REPORT_DELIVERY_MODE
     value: "LINK"
-  - name: GLIFIC_DAILY_REPORT_SO_LINK_TEMPLATE_ID
+  - name: WHATSAPP_DAILY_REPORT_SO_LINK_TEMPLATE_ID
     value: "880556"
-  - name: GLIFIC_DAILY_REPORT_SDO_LINK_TEMPLATE_ID
+  - name: WHATSAPP_DAILY_REPORT_SDO_LINK_TEMPLATE_ID
     value: "880556" 
   - name: DAILY_REPORT_LINK_BUTTON_BASE_URL
     value: "https://jalsoochak.in/minio/"
-  - name: GLIFIC_WEEKLY_REPORT_SO_LINK_TEMPLATE_ID
+  - name: WHATSAPP_WEEKLY_REPORT_SO_LINK_TEMPLATE_ID
     value: "882699"
-  - name: GLIFIC_WEEKLY_REPORT_SDO_LINK_TEMPLATE_ID
+  - name: WHATSAPP_WEEKLY_REPORT_SDO_LINK_TEMPLATE_ID
     value: "882699"
   - name: MESSAGING_SECRET_ACTIVE_MASTER_KEY_ID
     value: v1

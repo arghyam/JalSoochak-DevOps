@@ -87,27 +87,27 @@ env: |
       secretKeyRef:
         key: keycloak-issuer-uri
         name: jalsoochak
-  - name: MINIO_ENDPOINT
+  - name: STORAGE_ENDPOINT
     valueFrom:
       secretKeyRef:
         key: endpoint
         name: minio
-  - name: MINIO_BUCKET
+  - name: STORAGE_BUCKET
     valueFrom:
       secretKeyRef:
         key: bucket
         name: minio
-  - name: MINIO_ACCESS_KEY
+  - name: STORAGE_ACCESS_KEY
     valueFrom:
       secretKeyRef:
         key: accessKey
         name: minio
-  - name: MINIO_SECRET_KEY
+  - name: STORAGE_SECRET_KEY
     valueFrom:
       secretKeyRef:
         key: secretKey
         name: minio
-  - name: MINIO_REGION
+  - name: STORAGE_REGION
     valueFrom:
       secretKeyRef:
         key: region
@@ -124,19 +124,19 @@ env: |
       secretKeyRef:
         key: pii-hmac-key
         name: jalsoochak
-  - name: GLIFIC_SYNC_USER_PHONE
+  - name: WHATSAPP_SYNC_USER_PHONE
     valueFrom:
       secretKeyRef:
         key: glific-username
         name: glific
-  - name: GLIFIC_SYNC_USER_PASSWORD
+  - name: WHATSAPP_SYNC_USER_PASSWORD
     valueFrom:
       secretKeyRef:
         key: glific-password
         name: glific
-  - name: GLIFIC_RESUME_FLOW_ID
+  - name: WHATSAPP_RESUME_FLOW_ID
     value: "39776"
-  - name: FLOWVISION_ROLLOVER_RESOLUTION_ENABLED
+  - name: OCR_ROLLOVER_RESOLUTION_ENABLED
     value: "true"
   - name: TELEMETRY_WEBHOOK_AUTH_TOKEN_HASHES
     valueFrom:
