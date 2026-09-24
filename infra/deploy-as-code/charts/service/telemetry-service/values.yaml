@@ -112,6 +112,11 @@ env: |
       secretKeyRef:
         key: region
         name: minio
+  - name: STORAGE_PUBLIC_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: presigned-url
+        name: minio
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: PII_ENCRYPTION_KEY
