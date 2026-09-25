@@ -154,3 +154,5 @@ env: |
     value: "250"
   - name: DEFAULT_MEMBERS_PER_HOUSEHOLD
     value: "5"
+  - name: TELEMETRY_CACHE_METADATA_ENABLED
+    value: "false"
