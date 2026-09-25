@@ -11,7 +11,30 @@ ingress:
     - "api/v1/tenants"
     - "api/v1/system"
 # Init Containers Configs
-
+initContainers:
+  dbMigration:
+    enabled: true
+    image:
+      repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/tenant-service-db"
+      tag: "b7ff977047c2fc3ee8d74b88da5450fc7bd7864f"
+    env: |
+      - name: FLYWAY_URL
+        valueFrom:
+          secretKeyRef:
+            key: db-url
+            name: jalsoochak
+      - name: FLYWAY_USER
+        valueFrom:
+          secretKeyRef:
+            key: username
+            name: jalsoochak
+      - name: FLYWAY_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: password
+            name: jalsoochak
+      - name: FLYWAY_SCHEMAS
+        value: "common_schema,public"
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/tenant-service"
