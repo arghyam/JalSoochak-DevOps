@@ -23,14 +23,14 @@ on:
 jobs:
   Helm-Deployment:
     name: Deployment for ${{ inputs.service_name }}
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout DevOps Repo
         uses: actions/checkout@v4
         with:
           repository: arghyam/JalSoochak-Devops
-          ref: dev
+          ref: staging
           fetch-depth: 0
           
       - name: Set up Helm
@@ -43,9 +43,20 @@ jobs:
         with:
           helm-plugins: >
             https://github.com/databus23/helm-diff --verify=false
-            
+      - name: Configure Kubeconfig
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          export KUBECONFIG=$PWD/kubeconfig
+          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV            
       - name: Helm Deployment
         run: |
           IMAGE="${{ inputs.image_tag }}"
-          helmfile apply -f jalsoochak-helmfile.yaml.gotmpl --selector name=${{ inputs.service_name }} --set ${{ inputs.service_name }}.image.tag=$IMAGE
+          if [ "${{ inputs.service_name }}" = "tenant-service" ]; then
+            helmfile apply -f jalsoochak-helmfile.yaml --selector name=${{ inputs.service_name }} \
+              --set ${{ inputs.service_name }}.image.tag=$IMAGE \
+              --set ${{ inputs.service_name }}.initContainers.dbMigration.image.tag=$IMAGE
+          else
+            helmfile apply -f jalsoochak-helmfile.yaml --selector name=${{ inputs.service_name }} \
+              --set ${{ inputs.service_name }}.image.tag=$IMAGE
+          fi
         working-directory: infra/deploy-as-code
