@@ -142,7 +142,7 @@ env: |
         name: minio
   - name: STORAGE_BUCKET
     value: "tenant-assets"
-  - name: STORAGE_BASE_URL
+  - name: STORAGE_PUBLIC_BASE_URL
     valueFrom:
       secretKeyRef:
         key: endpoint
@@ -161,9 +161,9 @@ env: |
         name: jalsoochak
   - name: SINGLE_TENANT_MODE
     value: "false"
-  - name: GLIFIC_RESUME_BASE_URL
+  - name: WHATSAPP_RESUME_BASE_URL
     value: "https://api.arghyam.glific.com"
-  - name: GLIFIC_RESUME_ENABLED
+  - name: WHATSAPP_RESUME_ENABLED
     value: "true"
   - name: DAILY_REPORT_SCHEDULE_HOUR
     value: "17"
