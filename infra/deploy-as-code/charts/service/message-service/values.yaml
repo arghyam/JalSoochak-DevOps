@@ -108,7 +108,7 @@ env: |
   - name: WHATSAPP_DAILY_REPORT_SO_TEMPLATE_ID
     value: "876193"
   - name: WHATSAPP_NUDGE_FLOW_ID
-    value: "37300"
+    value: "43037"
   - name: WHATSAPP_WELCOME_FLOW_ID
     value: "38949"
   - name: STORAGE_ENDPOINT
