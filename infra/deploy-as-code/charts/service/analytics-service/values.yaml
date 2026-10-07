@@ -111,3 +111,7 @@ env: |
     value: "1"
   - name: WEEKLY_REPORT_SDO_MIN_SUPPLY_DAYS
     value: "4"
+  - name: ANALYTICS_AGG_BACKFILL_START_DATE
+    value: "2025-06-01"
+  - name: ANALYTICS_AGG_BACKFILL_ENABLED
+    value: "true"
