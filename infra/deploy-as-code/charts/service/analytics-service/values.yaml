@@ -113,5 +113,5 @@ env: |
     value: "4"
   - name: ANALYTICS_AGG_BACKFILL_START_DATE
     value: "2025-06-01"
-  - name: ANALYTICS_AGG_BACKFILL_ENABLED
+  - name: ANALYTICS_READ_FROM_AGGREGATES
     value: "true"
