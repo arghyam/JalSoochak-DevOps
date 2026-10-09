@@ -8,7 +8,6 @@ ingress:
   enabled: true
   zuul: true
   contexts:
-    - "swagger-ui.html"
     - "swagger-ui"
     - "swagger-resources"
     - "v3/api-docs"
@@ -27,7 +26,7 @@ ingress:
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/apigateway"
   tag: "b693f88bd67ed8539c5ac0ea2764faf73a8dfeb8"
-replicas: "2"
+replicas: "1"
 # tracing-enabled: true
 healthChecks:
   enabled: true
