@@ -222,6 +222,8 @@ env: |
       secretKeyRef:
         key: message-master-key-v1
         name: jalsoochak
+  - name: WHATSAPP_STATUS_RECONCILE_ENABLED
+    value: 'true'
   - name: NOTIFICATIONS_LEDGER_ENABLED
     value: "true"
   - name: NOTIFICATIONS_EMAIL_WEBHOOK_VERIFICATION_KEYS
