@@ -154,3 +154,13 @@ env: |
     value: "250"
   - name: DEFAULT_MEMBERS_PER_HOUSEHOLD
     value: "5"
+  - name: OCR_ELM_URL
+    valueFrom:
+      secretKeyRef:
+        key: OCR_ELM_URL
+        name: jalsoochak
+  - name: OCR_ELM_API_KEY
+    valueFrom:
+      secretKeyRef:
+        key: METER_SERVICE_API_KEY
+        name: jalsoochak
