@@ -174,3 +174,7 @@ env: |
       secretKeyRef:
         key: message-master-key-v1
         name: jalsoochak
+  - name: NOTIFICATION_SCHEDULER_ENABLED
+    value: "false"
+  - name: NOTIFICATION_SCHEDULER_GRACE
+    value: "15m"
