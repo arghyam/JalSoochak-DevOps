@@ -137,3 +137,8 @@ env: |
         name: jalsoochak
   - name: STATE_SYNC_MODE
     value: "DRY_RUN"
+  - name: JJM_BRAIN_API_KEY
+    valueFrom:
+      secretKeyRef:
+        key: JJM_BRAIN_API_KEY
+        name: jalsoochak
