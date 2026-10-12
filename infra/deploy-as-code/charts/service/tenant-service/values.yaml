@@ -175,6 +175,6 @@ env: |
         key: message-master-key-v1
         name: jalsoochak
   - name: NOTIFICATION_SCHEDULER_ENABLED
-    value: "false"
+    value: "true"
   - name: NOTIFICATION_SCHEDULER_GRACE
     value: "15m"
