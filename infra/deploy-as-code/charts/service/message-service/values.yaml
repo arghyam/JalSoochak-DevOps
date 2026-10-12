@@ -108,7 +108,7 @@ env: |
   - name: WHATSAPP_DAILY_REPORT_SO_TEMPLATE_ID
     value: "876193"
   - name: WHATSAPP_NUDGE_FLOW_ID
-    value: "39014"
+    value: "43233"
   - name: WHATSAPP_WELCOME_FLOW_ID
     value: "38125"
   - name: STORAGE_ENDPOINT
@@ -215,3 +215,19 @@ env: |
     value: "880556"
   - name: WHATSAPP_WEEKLY_REPORT_SDO_LINK_TEMPLATE_ID
     value: "880556"
+  - name: MESSAGING_SECRET_ACTIVE_MASTER_KEY_ID
+    value: v1
+  - name: MESSAGING_SECRET_MASTER_KEY_V1
+    valueFrom:
+      secretKeyRef:
+        key: message-master-key-v1
+        name: jalsoochak
+  - name: WHATSAPP_STATUS_RECONCILE_ENABLED
+    value: 'true'
+  - name: NOTIFICATIONS_LEDGER_ENABLED
+    value: "true"
+  - name: NOTIFICATIONS_EMAIL_WEBHOOK_VERIFICATION_KEYS
+    valueFrom:
+      secretKeyRef:
+        key: NOTIFICATIONS_EMAIL_WEBHOOK_VERIFICATION_KEYS
+        name: jalsoochak
