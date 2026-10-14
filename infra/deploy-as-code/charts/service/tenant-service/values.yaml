@@ -39,6 +39,8 @@ initContainers:
             name: jalsoochak
       - name: FLYWAY_SCHEMAS
         value: "common_schema,public"
+      - name: FLYWAY_TABLE
+        value: jalsoochak_flyway
 # Container Configs
 image:
   repository: "252649026375.dkr.ecr.ap-south-1.amazonaws.com/tenant-service"
