@@ -183,3 +183,13 @@ env: |
     value: "5"
   - name: TELEMETRY_CACHE_METADATA_ENABLED
     value: "false"
+  - name: OCR_ELM_URL
+    valueFrom:
+      secretKeyRef:
+        key: OCR_ELM_URL
+        name: jalsoochak
+  - name: OCR_ELM_API_KEY
+    valueFrom:
+      secretKeyRef:
+        key: METER_SERVICE_API_KEY
+        name: jalsoochak
