@@ -142,3 +142,7 @@ env: |
       secretKeyRef:
         key: JJM_BRAIN_API_KEY
         name: jalsoochak
+  - name: STATE_SYNC_TENANT_CODE
+    value: "AS"
+  - name: STATE_SYNC_ENABLED
+    value: "false"
