@@ -21,7 +21,7 @@ data:
         DAYS: 1,
         ALLOWED_DAYS: [1, 7, 30],
       },
-      CAPTCHA_ENABLED: true,
+      CAPTCHA_ENABLED: false,
       RECAPTCHA_SITE_KEY: '6LcWUJktAAAAAIjNounA2IpSazXfRx5PR6RESwwh',
       SINGLE_TENANT_MODE: false,
     }

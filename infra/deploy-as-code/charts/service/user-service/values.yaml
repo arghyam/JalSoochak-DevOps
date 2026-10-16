@@ -177,7 +177,7 @@ env: |
   - name: STORAGE_PRESIGNED_TTL_SECONDS
     value: "3600"
   - name: CAPTCHA_ENABLED
-    value: 'true'
+    value: 'false'
   - name: CAPTCHA_SECRET_KEY
     valueFrom:
       secretKeyRef:
