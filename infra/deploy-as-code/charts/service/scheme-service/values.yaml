@@ -146,3 +146,5 @@ env: |
     value: "AS"
   - name: STATE_SYNC_ENABLED
     value: "false"
+  - name: STATE_SYNC_MODE
+    value: APPLY
