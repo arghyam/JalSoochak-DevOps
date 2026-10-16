@@ -146,3 +146,9 @@ env: |
     value: "false"
   - name: STATE_SYNC_MODE
     value: APPLY
+  - name: STATE_SYNC_ACTOR_USER_ID
+    value: "81917"
+  - name: STATE_SYNC_STALE_RUN_AFTER
+    value: PT2H
+  - name: STATE_SYNC_DELTA_CRON
+    value: "0 0 2 * * *""
