@@ -146,3 +146,5 @@ env: |
     value: "false"
   - name: STATE_SYNC_MODE
     value: APPLY
+  - name: STATE_SYNC_ACTOR_USER_ID
+    value: '21346'
