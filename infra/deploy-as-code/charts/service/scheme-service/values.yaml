@@ -135,8 +135,6 @@ env: |
       secretKeyRef:
         key: pii-hmac-key
         name: jalsoochak
-  - name: STATE_SYNC_MODE
-    value: "DRY_RUN"
   - name: JJM_BRAIN_API_KEY
     valueFrom:
       secretKeyRef:
