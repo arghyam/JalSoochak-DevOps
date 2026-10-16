@@ -151,4 +151,4 @@ env: |
   - name: STATE_SYNC_STALE_RUN_AFTER
     value: PT2H
   - name: STATE_SYNC_DELTA_CRON
-    value: "0 0 2 * * *""
+    value: "0 0 2 * * *"
