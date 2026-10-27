@@ -139,6 +139,8 @@ env: |
       secretKeyRef:
         key: glific-password
         name: glific
+  - name: WHATSAPP_SYNC_ENABLED
+    value: "true"
   - name: WHATSAPP_RESUME_FLOW_ID
     value: "43275"
   - name: OCR_ROLLOVER_RESOLUTION_ENABLED
