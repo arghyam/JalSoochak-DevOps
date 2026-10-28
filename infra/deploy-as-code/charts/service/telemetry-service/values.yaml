@@ -150,6 +150,11 @@ env: |
       secretKeyRef:
         key: telemetry-webhook-token-hash
         name: jalsoochak
+  - name: TELEMETRY_INTERNAL_AUTH_TOKEN_HASH
+    valueFrom:
+      secretKeyRef:
+        key: telemetry-internal-token-hash
+        name: jalsoochak
   - name: TELEMETRY_SUPPLY_PLAUSIBILITY_MODE
     value: "ENFORCE"
   - name: HIGH_QUANTITY_THRESHOLD_LIMIT_PER_PERSON
