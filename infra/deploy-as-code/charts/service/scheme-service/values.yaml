@@ -145,7 +145,7 @@ env: |
   - name: STATE_SYNC_ENABLED
     value: "false"
   - name: STATE_SYNC_MODE
-    value: APPLY
+    value: DRY_RUN
   - name: STATE_SYNC_ACTOR_USER_ID
     value: "81917"
   - name: STATE_SYNC_STALE_RUN_AFTER
