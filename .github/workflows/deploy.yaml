@@ -11,6 +11,7 @@ on:
         description: 'Docker image tag'
         required: true
         type: string
+
   workflow_call:
     inputs:
       service_name:
@@ -25,38 +26,119 @@ jobs:
     name: Deployment for ${{ inputs.service_name }}
     runs-on: ubuntu-latest
 
+    env:
+      KUBECONFIG: ${{ github.workspace }}/kubeconfig
+
     steps:
+      # 1. Checkout DevOps repository
       - name: Checkout DevOps Repo
         uses: actions/checkout@v4
         with:
           repository: arghyam/JalSoochak-Devops
           ref: staging
           fetch-depth: 0
-          
-      - name: Set up Helm
+
+      # 2. Install Helm 3
+      - name: Set up Helm 3
         uses: azure/setup-helm@v3
         with:
           version: 'v3.22.1'
 
-      - name: Install Helmfile
-        uses: helmfile/helmfile-action@v1.9.0
-        with:
-          helm-plugins: >
-            https://github.com/databus23/helm-diff --verify=false
-      - name: Configure Kubeconfig
+      # 3. Verify Helm version
+      - name: Verify Helm
+        shell: bash
         run: |
-          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
-          export KUBECONFIG=$PWD/kubeconfig
-          echo "KUBECONFIG=$PWD/kubeconfig" >> $GITHUB_ENV            
-      - name: Helm Deployment
-        run: |
-          IMAGE="${{ inputs.image_tag }}"
-          if [ "${{ inputs.service_name }}" = "tenant-service" ]; then
-            helmfile apply -f jalsoochak-helmfile.yaml --selector name=${{ inputs.service_name }} \
-              --set ${{ inputs.service_name }}.image.tag=$IMAGE \
-              --set ${{ inputs.service_name }}.initContainers.dbMigration.image.tag=$IMAGE
-          else
-            helmfile apply -f jalsoochak-helmfile.yaml --selector name=${{ inputs.service_name }} \
-              --set ${{ inputs.service_name }}.image.tag=$IMAGE
+          set -euo pipefail
+          echo "Helm binary:"
+          which helm
+          echo "Helm version:"
+          helm version --short
+
+          if ! helm version --short | grep -q 'v3\.22\.1'; then
+            echo "ERROR: Expected Helm v3.22.1"
+            exit 1
           fi
+
+      # 4. Install Helmfile manually (do not use helmfile action)
+      - name: Install Helmfile
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          HELMFILE_VERSION="1.8.4"
+
+          curl -fsSL \
+            "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz" \
+            -o /tmp/helmfile.tar.gz
+
+          tar -xzf /tmp/helmfile.tar.gz -C /tmp helmfile
+
+          sudo install /tmp/helmfile /usr/local/bin/helmfile
+
+          echo "Helmfile version:"
+          helmfile --version
+
+      # 5. Install Helm diff plugin using Helm 3
+      - name: Install Helm Diff Plugin
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          helm plugin install \
+            https://github.com/databus23/helm-diff \
+            --verify=false
+
+          helm plugin list
+
+      # 6. Configure Kubernetes access
+      - name: Configure Kubeconfig
+        env:
+          KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          printf '%s' "$KUBECONFIG_CONTENT" > "$KUBECONFIG"
+          chmod 600 "$KUBECONFIG"
+
+          echo "Kubeconfig configured."
+
+      # 7. Deploy selected service
+      - name: Helm Deployment
         working-directory: infra/deploy-as-code
+        env:
+          SERVICE_NAME: ${{ inputs.service_name }}
+          IMAGE_TAG: ${{ inputs.image_tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "===================================="
+          echo "Service: $SERVICE_NAME"
+          echo "Image:   $IMAGE_TAG"
+          echo "===================================="
+
+          echo "Helm:"
+          which helm
+          helm version --short
+
+          echo "Helmfile:"
+          helmfile --version
+
+          echo "Kubernetes context:"
+          kubectl config current-context
+
+          if [ "$SERVICE_NAME" = "tenant-service" ]; then
+            helmfile \
+              -f jalsoochak-helmfile.yaml \
+              --selector "name=$SERVICE_NAME" \
+              apply \
+              --set "$SERVICE_NAME.image.tag=$IMAGE_TAG" \
+              --set "$SERVICE_NAME.initContainers.dbMigration.image.tag=$IMAGE_TAG"
+          else
+            helmfile \
+              -f jalsoochak-helmfile.yaml \
+              --selector "name=$SERVICE_NAME" \
+              apply \
+              --set "$SERVICE_NAME.image.tag=$IMAGE_TAG"
+          fi
