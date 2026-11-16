@@ -36,7 +36,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v3
         with:
-          version: 'latest'
+          version: 'v3.22.1'
 
       - name: Install Helmfile
         uses: helmfile/helmfile-action@v1.9.0
