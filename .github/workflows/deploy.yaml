@@ -11,6 +11,11 @@ on:
         description: 'Docker image tag'
         required: true
         type: string
+      domain:
+        description: 'Domain for helm deployment'
+        required: false
+        type: string
+        default: 'staging.jalsoochak.in'
 
   workflow_call:
     inputs:
@@ -20,6 +25,10 @@ on:
       image_tag:
         required: true
         type: string
+      domain:
+        required: false
+        type: string
+        default: 'staging.jalsoochak.in'
 
 jobs:
   Helm-Deployment:
@@ -90,13 +99,17 @@ jobs:
         env:
           SERVICE_NAME: ${{ inputs.service_name }}
           IMAGE_TAG: ${{ inputs.image_tag }}
+          DOMAIN: ${{ inputs.domain || 'staging.jalsoochak.in' }}
         shell: bash
         run: |
           set -euo pipefail
 
+          DOMAIN="${DOMAIN:-staging.jalsoochak.in}"
+
           echo "===================================="
           echo "Deploying service: $SERVICE_NAME"
           echo "Image tag: $IMAGE_TAG"
+          echo "Domain: $DOMAIN"
           echo "===================================="
 
           if [ "$SERVICE_NAME" = "tenant-service" ]; then
@@ -105,11 +118,15 @@ jobs:
               --selector "name=$SERVICE_NAME" \
               apply \
               --set "$SERVICE_NAME.image.tag=$IMAGE_TAG" \
-              --set "$SERVICE_NAME.initContainers.dbMigration.image.tag=$IMAGE_TAG"
+              --set "$SERVICE_NAME.initContainers.dbMigration.image.tag=$IMAGE_TAG" \
+              --set "global.domain=$DOMAIN" \
+              --set "domain=$DOMAIN"
           else
             helmfile \
               -f jalsoochak-helmfile.yaml \
               --selector "name=$SERVICE_NAME" \
               apply \
-              --set "$SERVICE_NAME.image.tag=$IMAGE_TAG"
+              --set "$SERVICE_NAME.image.tag=$IMAGE_TAG" \
+              --set "global.domain=$DOMAIN" \
+              --set "domain=$DOMAIN"
           fi
