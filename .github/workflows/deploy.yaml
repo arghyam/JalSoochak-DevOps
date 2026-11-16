@@ -42,7 +42,7 @@ jobs:
       - name: Install Helmfile
         uses: helmfile/helmfile-action@v1.9.0
         with:
-          helmfile-version: '1.8.4'
+          helmfile-version: 'v1.8.4'
           helm-version: 'v3.22.1'
           helmfile-auto-init: false
           helmfile-workdirectory: .
