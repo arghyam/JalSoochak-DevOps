@@ -38,59 +38,40 @@ jobs:
           ref: staging
           fetch-depth: 0
 
-      # 2. Install Helm 3
-      - name: Set up Helm 3
-        uses: azure/setup-helm@v3
+      # 2. Install Helmfile with Helm 3
+      - name: Install Helmfile
+        uses: helmfile/helmfile-action@v1.9.0
         with:
-          version: 'v3.22.1'
+          helmfile-version: '1.8.4'
+          helm-version: 'v3.22.1'
+          helmfile-auto-init: false
+          helmfile-workdirectory: .
+          helm-plugins: https://github.com/databus23/helm-diff
 
-      # 3. Verify Helm version
-      - name: Verify Helm
+      # 3. Verify Helm and Helmfile versions
+      - name: Verify Helm Setup
         shell: bash
         run: |
           set -euo pipefail
+
           echo "Helm binary:"
           which helm
+
           echo "Helm version:"
           helm version --short
+
+          echo "Helmfile version:"
+          helmfile --version
+
+          echo "Installed Helm plugins:"
+          helm plugin list
 
           if ! helm version --short | grep -q 'v3\.22\.1'; then
             echo "ERROR: Expected Helm v3.22.1"
             exit 1
           fi
 
-      # 4. Install Helmfile manually (do not use helmfile action)
-      - name: Install Helmfile
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          HELMFILE_VERSION="1.8.4"
-
-          curl -fsSL \
-            "https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz" \
-            -o /tmp/helmfile.tar.gz
-
-          tar -xzf /tmp/helmfile.tar.gz -C /tmp helmfile
-
-          sudo install /tmp/helmfile /usr/local/bin/helmfile
-
-          echo "Helmfile version:"
-          helmfile --version
-
-      # 5. Install Helm diff plugin using Helm 3
-      - name: Install Helm Diff Plugin
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          helm plugin install \
-            https://github.com/databus23/helm-diff \
-            --verify=false
-
-          helm plugin list
-
-      # 6. Configure Kubernetes access
+      # 4. Configure Kubernetes access
       - name: Configure Kubeconfig
         env:
           KUBECONFIG_CONTENT: ${{ secrets.KUBECONFIG }}
@@ -103,7 +84,7 @@ jobs:
 
           echo "Kubeconfig configured."
 
-      # 7. Deploy selected service
+      # 5. Deploy selected service
       - name: Helm Deployment
         working-directory: infra/deploy-as-code
         env:
@@ -114,19 +95,9 @@ jobs:
           set -euo pipefail
 
           echo "===================================="
-          echo "Service: $SERVICE_NAME"
-          echo "Image:   $IMAGE_TAG"
+          echo "Deploying service: $SERVICE_NAME"
+          echo "Image tag: $IMAGE_TAG"
           echo "===================================="
-
-          echo "Helm:"
-          which helm
-          helm version --short
-
-          echo "Helmfile:"
-          helmfile --version
-
-          echo "Kubernetes context:"
-          kubectl config current-context
 
           if [ "$SERVICE_NAME" = "tenant-service" ]; then
             helmfile \
