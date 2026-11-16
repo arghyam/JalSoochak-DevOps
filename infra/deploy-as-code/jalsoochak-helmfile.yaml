@@ -15,9 +15,6 @@ values:
   - ./charts/environments/jalsoochak-dev.yaml
 
 helmDefaults:
-  args:
-    - --values
-    - ./charts/environments/jalsoochak-dev.yaml
 
 releases:
   - name: ingress-nginx
