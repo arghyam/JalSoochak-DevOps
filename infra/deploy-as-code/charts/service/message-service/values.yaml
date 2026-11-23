@@ -231,3 +231,34 @@ env: |
       secretKeyRef:
         key: NOTIFICATIONS_EMAIL_WEBHOOK_VERIFICATION_KEYS
         name: jalsoochak
+  - name: STORAGE_DELIVERY_ENDPOINT
+    valueFrom:
+      secretKeyRef:
+        key: endpoint
+        name: s3
+  - name: STORAGE_DELIVERY_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        key: accessKey
+        name: s3
+  - name: STORAGE_DELIVERY_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        key: secretKey
+        name: s3
+  - name: STORAGE_DELIVERY_REGION
+    valueFrom:
+      secretKeyRef:
+        key: region
+        name: s3
+  - name: STORAGE_DELIVERY_BUCKET
+    value: "escalation-reports"
+  - name: STORAGE_DELIVERY_PUBLIC_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        key: presigned-url
+        name: s3
+  - name: NOTIFICATIONS_WEEKLY_REPORT_DELIVERY_MODE
+    value: 'DOCUMENT'
+  - name: STORAGE_DELIVERY_ENABLED
+    value: "true"
