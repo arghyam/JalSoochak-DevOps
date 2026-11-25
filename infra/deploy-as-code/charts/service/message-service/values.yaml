@@ -100,7 +100,7 @@ env: |
   - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
     value: "http://servicediscovery:8761/eureka"
   - name: WHATSAPP_NUDGE_TEMPLATE_ID
-    value: "7986"
+    value: "840190"
   - name: WHATSAPP_ESCALATION_TEMPLATE_ID
     value: "829817"
   - name: WHATSAPP_DAILY_REPORT_SDO_TEMPLATE_ID
